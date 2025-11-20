@@ -1,24 +1,51 @@
 import { Head, Link } from '@inertiajs/react';
+import { useState, useEffect } from 'react';
 
 export default function Welcome() {
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        setIsVisible(true);
+    }, []);
+
     return (
         <>
             <Head title="Oriki: The Royal Dining Experience" />
-            <div className="flex min-h-screen flex-col bg-gradient-to-br from-amber-50 to-orange-100 dark:from-gray-900 dark:to-gray-800">
-                <nav className="border-b border-amber-200/50 bg-white/80 backdrop-blur-sm dark:border-gray-700 dark:bg-gray-900/80">
+
+            {/* Background with animated gradient */}
+            <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-amber-950/20 to-slate-900">
+                {/* Animated background patterns */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+                <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-amber-500 opacity-20 blur-[100px]"></div>
+                <div className="absolute bottom-0 right-0 -z-10 h-[310px] w-[310px] rounded-full bg-orange-500 opacity-20 blur-[100px]"></div>
+
+                {/* Navigation */}
+                <nav className="relative border-b border-white/5 bg-slate-900/50 backdrop-blur-xl">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <div className="flex h-16 items-center justify-between">
-                            <div className="flex items-center">
-                                <h2 className="text-xl font-bold text-amber-600 dark:text-amber-400">
-                                    Oriki
-                                </h2>
+                        <div className="flex h-20 items-center justify-between">
+                            <div className="flex items-center space-x-3">
+                                <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 p-[2px]">
+                                    <div className="flex h-full w-full items-center justify-center rounded-[10px] bg-slate-900">
+                                        <span className="text-lg font-bold text-amber-500">O</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h2 className="text-xl font-bold tracking-tight text-white">
+                                        Oriki
+                                    </h2>
+                                    <p className="text-xs text-amber-400/70">Royal Gastronomy</p>
+                                </div>
                             </div>
                             <div>
                                 <Link
                                     href="/register"
-                                    className="rounded-lg bg-amber-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 dark:bg-amber-500 dark:hover:bg-amber-600"
+                                    className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-amber-500 to-orange-600 px-6 py-3 font-semibold text-white shadow-lg shadow-amber-500/25 transition-all hover:shadow-xl hover:shadow-amber-500/40 hover:scale-105"
                                 >
-                                    Register Now
+                                    <span className="relative z-10">Register Now</span>
+                                    <svg className="relative z-10 h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                    </svg>
+                                    <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-amber-500 opacity-0 transition-opacity group-hover:opacity-100"></div>
                                 </Link>
                             </div>
                         </div>
