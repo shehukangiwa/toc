@@ -47,7 +47,7 @@ export default function Register({ registration }: { registration?: Registration
                     <div className="mx-auto max-w-4xl">
                         {/* Header */}
                         <div className="mb-12 animate-slide-up text-center">
-                            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 via-pink-500 to-purple-500 shadow-2xl">
+                            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-green-600 via-yellow-500 to-emerald-600 shadow-2xl">
                                 <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                 </svg>
@@ -66,7 +66,7 @@ export default function Register({ registration }: { registration?: Registration
                                 {/* Personal Information Section */}
                                 <div>
                                     <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold text-white">
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-pink-500">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-green-600 to-yellow-500">
                                             <span className="text-lg font-bold">1</span>
                                         </div>
                                         Personal Information
@@ -156,7 +156,7 @@ export default function Register({ registration }: { registration?: Registration
                                 {/* Contact Information Section */}
                                 <div>
                                     <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold text-white">
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-pink-500 to-purple-500">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-500 to-green-600">
                                             <span className="text-lg font-bold">2</span>
                                         </div>
                                         Contact Details
@@ -263,7 +263,7 @@ export default function Register({ registration }: { registration?: Registration
                                 {/* Optional Information Section */}
                                 <div>
                                     <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold text-white">
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-blue-500">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-600 to-green-500">
                                             <span className="text-lg font-bold">3</span>
                                         </div>
                                         Professional Details
@@ -324,7 +324,7 @@ export default function Register({ registration }: { registration?: Registration
                                 </div>
 
                                 {/* Terms and Conditions */}
-                                <div className="rounded-2xl border border-amber-500/30 bg-gradient-to-br from-amber-500/10 to-pink-500/10 p-6 backdrop-blur-sm">
+                                <div className="rounded-2xl border border-green-500/30 bg-gradient-to-br from-green-500/10 to-yellow-500/10 p-6 backdrop-blur-sm">
                                     <div className="flex items-start gap-4">
                                         <div className="flex h-6 items-center">
                                             <input
@@ -334,7 +334,7 @@ export default function Register({ registration }: { registration?: Registration
                                                 onChange={(e) =>
                                                     setData('disclaimer_accepted', e.target.checked)
                                                 }
-                                                className="h-5 w-5 rounded-lg border-2 border-amber-500/50 bg-white/10 text-amber-500 transition-all focus:ring-2 focus:ring-amber-500/50 focus:ring-offset-0"
+                                                className="h-5 w-5 rounded-lg border-2 border-green-500/50 bg-white/10 text-green-500 transition-all focus:ring-2 focus:ring-green-500/50 focus:ring-offset-0"
                                                 required
                                             />
                                         </div>
@@ -344,7 +344,7 @@ export default function Register({ registration }: { registration?: Registration
                                                 className="font-semibold text-white"
                                             >
                                                 I accept the terms and conditions{' '}
-                                                <span className="text-pink-400">*</span>
+                                                <span className="text-yellow-400">*</span>
                                             </label>
                                             <p className="mt-2 text-sm leading-relaxed text-gray-300">
                                                 By registering for this event, I understand that my
@@ -378,7 +378,7 @@ export default function Register({ registration }: { registration?: Registration
                                     <button
                                         type="submit"
                                         disabled={processing}
-                                        className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-gradient-to-r from-amber-500 via-pink-500 to-purple-500 px-8 py-4 text-base font-semibold text-white shadow-2xl transition-all hover:scale-105 hover:shadow-pink-500/50 disabled:opacity-50 disabled:hover:scale-100"
+                                        className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-gradient-to-r from-green-600 via-yellow-500 to-emerald-600 px-8 py-4 text-base font-semibold text-white shadow-2xl transition-all hover:scale-105 hover:shadow-green-500/50 disabled:opacity-50 disabled:hover:scale-100"
                                     >
                                         {processing ? (
                                             <>
