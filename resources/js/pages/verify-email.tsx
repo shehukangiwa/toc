@@ -112,10 +112,10 @@ export default function VerifyEmail({
 
                         {/* Important Notice Card */}
                         <div className="animate-slide-up mt-8" style={{ animationDelay: '0.2s' }}>
-                            <div className="glass-dark overflow-hidden rounded-2xl border border-purple-500/30">
-                                <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 px-6 py-4">
+                            <div className="glass-dark overflow-hidden rounded-2xl border border-yellow-500/30">
+                                <div className="bg-gradient-to-r from-green-500/20 to-yellow-500/20 px-6 py-4">
                                     <div className="flex items-center gap-3">
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-500">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-green-600 to-yellow-500">
                                             <svg className="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                                             </svg>
@@ -128,19 +128,19 @@ export default function VerifyEmail({
                                 <div className="p-6">
                                     <ul className="space-y-3 text-sm text-gray-300">
                                         <li className="flex items-start gap-3">
-                                            <svg className="mt-0.5 h-5 w-5 flex-shrink-0 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg className="mt-0.5 h-5 w-5 flex-shrink-0 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                             <span>You must verify your email before accessing the registration form</span>
                                         </li>
                                         <li className="flex items-start gap-3">
-                                            <svg className="mt-0.5 h-5 w-5 flex-shrink-0 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg className="mt-0.5 h-5 w-5 flex-shrink-0 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                             <span>The verification link expires in 60 minutes for security</span>
                                         </li>
                                         <li className="flex items-start gap-3">
-                                            <svg className="mt-0.5 h-5 w-5 flex-shrink-0 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg className="mt-0.5 h-5 w-5 flex-shrink-0 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                             <span>After verification, you'll be redirected to complete your details</span>

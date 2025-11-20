@@ -111,9 +111,9 @@ export default function RegistrationComplete({ registration }: { registration: R
 
                         {/* Registration Details Card */}
                         <div className="animate-slide-up glass-dark mb-12 overflow-hidden rounded-3xl" style={{ animationDelay: '0.5s' }}>
-                            <div className="border-b border-white/10 bg-gradient-to-r from-amber-500/20 via-pink-500/20 to-purple-500/20 px-8 py-6">
+                            <div className="border-b border-white/10 bg-gradient-to-r from-green-500/20 via-yellow-500/20 to-emerald-500/20 px-8 py-6">
                                 <h3 className="flex items-center gap-3 text-2xl font-bold text-white">
-                                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-pink-500">
+                                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-green-600 to-yellow-500">
                                         <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                         </svg>
@@ -207,7 +207,7 @@ export default function RegistrationComplete({ registration }: { registration: R
                         <div className="animate-slide-up text-center" style={{ animationDelay: '0.6s' }}>
                             <Link
                                 href="/"
-                                className="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-amber-500 via-pink-500 to-purple-500 px-10 py-5 text-lg font-semibold text-white shadow-2xl transition-all hover:scale-105 hover:shadow-pink-500/50"
+                                className="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-green-600 via-yellow-500 to-emerald-600 px-10 py-5 text-lg font-semibold text-white shadow-2xl transition-all hover:scale-105 hover:shadow-green-500/50"
                             >
                                 <svg className="h-6 w-6 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />

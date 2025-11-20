@@ -15,8 +15,8 @@ export default function Welcome() {
                                 <div className="animate-slide-up space-y-8">
                                     <div className="inline-flex items-center gap-2 rounded-full glass px-4 py-2 text-sm text-white">
                                         <span className="relative flex h-2 w-2">
-                                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75"></span>
-                                            <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500"></span>
+                                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-yellow-400 opacity-75"></span>
+                                            <span className="relative inline-flex h-2 w-2 rounded-full bg-yellow-500"></span>
                                         </span>
                                         Limited Seating Available
                                     </div>
@@ -36,7 +36,7 @@ export default function Welcome() {
                                     <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                                         <Link
                                             href="/register"
-                                            className="group inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-amber-500 via-pink-500 to-purple-500 px-8 py-4 text-lg font-semibold text-white shadow-2xl transition-all hover:scale-105 hover:shadow-pink-500/50"
+                                            className="group inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-green-600 via-yellow-500 to-emerald-600 px-8 py-4 text-lg font-semibold text-white shadow-2xl transition-all hover:scale-105 hover:shadow-green-500/50"
                                         >
                                             Reserve Your Seat
                                             <svg className="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,7 +73,7 @@ export default function Welcome() {
                                 {/* Right Image Placeholder */}
                                 <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
                                     <div className="relative">
-                                        <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-amber-500 via-pink-500 to-purple-500 opacity-20 blur-2xl"></div>
+                                        <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-green-500 via-yellow-500 to-emerald-500 opacity-20 blur-2xl"></div>
                                         <div className="image-placeholder relative aspect-[4/5] overflow-hidden rounded-3xl border border-white/20 shadow-2xl">
                                             <div className="absolute inset-0 flex items-center justify-center">
                                                 <div className="text-center">
@@ -104,8 +104,8 @@ export default function Welcome() {
 
                             <div className="grid gap-8 md:grid-cols-3">
                                 {/* Feature 1 */}
-                                <div className="group animate-slide-up glass-dark rounded-2xl p-8 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-amber-500/20" style={{ animationDelay: '0.1s' }}>
-                                    <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-pink-500 shadow-lg">
+                                <div className="group animate-slide-up glass-dark rounded-2xl p-8 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-green-500/20" style={{ animationDelay: '0.1s' }}>
+                                    <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-green-600 to-yellow-500 shadow-lg">
                                         <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
@@ -119,8 +119,8 @@ export default function Welcome() {
                                 </div>
 
                                 {/* Feature 2 */}
-                                <div className="group animate-slide-up glass-dark rounded-2xl p-8 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20" style={{ animationDelay: '0.2s' }}>
-                                    <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-pink-500 to-purple-500 shadow-lg">
+                                <div className="group animate-slide-up glass-dark rounded-2xl p-8 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/20" style={{ animationDelay: '0.2s' }}>
+                                    <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-yellow-500 to-green-600 shadow-lg">
                                         <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                                         </svg>
@@ -134,8 +134,8 @@ export default function Welcome() {
                                 </div>
 
                                 {/* Feature 3 */}
-                                <div className="group animate-slide-up glass-dark rounded-2xl p-8 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20" style={{ animationDelay: '0.3s' }}>
-                                    <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-blue-500 shadow-lg">
+                                <div className="group animate-slide-up glass-dark rounded-2xl p-8 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/20" style={{ animationDelay: '0.3s' }}>
+                                    <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-600 to-green-500 shadow-lg">
                                         <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                                         </svg>
@@ -249,7 +249,7 @@ export default function Welcome() {
                                 </p>
                                 <Link
                                     href="/register"
-                                    className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-amber-500 via-pink-500 to-purple-500 px-10 py-5 text-lg font-semibold text-white shadow-2xl transition-all hover:scale-105 hover:shadow-pink-500/50"
+                                    className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-green-600 via-yellow-500 to-emerald-600 px-10 py-5 text-lg font-semibold text-white shadow-2xl transition-all hover:scale-105 hover:shadow-green-500/50"
                                 >
                                     Reserve Your Seat Now
                                     <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
