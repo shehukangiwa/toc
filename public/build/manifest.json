@@ -1,6 +1,13 @@
 {
+  "_Layout-CHcJZT3n.js": {
+    "file": "assets/Layout-CHcJZT3n.js",
+    "name": "Layout",
+    "imports": [
+      "resources/js/app.tsx"
+    ]
+  },
   "resources/css/app.css": {
-    "file": "assets/app-BF1AQ3Vn.css",
+    "file": "assets/app-C9AXhyWl.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "names": [
@@ -8,7 +15,7 @@
     ]
   },
   "resources/js/app.tsx": {
-    "file": "assets/app-fs8Z3bp1.js",
+    "file": "assets/app-ysoWBBQB.js",
     "name": "app",
     "src": "resources/js/app.tsx",
     "isEntry": true,
@@ -19,55 +26,59 @@
       "resources/js/pages/welcome.tsx"
     ],
     "css": [
-      "assets/app-BF1AQ3Vn.css"
+      "assets/app-C9AXhyWl.css"
     ]
   },
   "resources/js/pages/register.tsx": {
-    "file": "assets/register-DDcR6RTx.js",
+    "file": "assets/register-CwrTeQ66.js",
     "name": "register",
     "src": "resources/js/pages/register.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "resources/js/app.tsx"
+      "resources/js/app.tsx",
+      "_Layout-CHcJZT3n.js"
     ],
     "css": [
-      "assets/app-BF1AQ3Vn.css"
+      "assets/app-C9AXhyWl.css"
     ]
   },
   "resources/js/pages/registration-complete.tsx": {
-    "file": "assets/registration-complete-Dp2UAMaN.js",
+    "file": "assets/registration-complete-DGZIPqUa.js",
     "name": "registration-complete",
     "src": "resources/js/pages/registration-complete.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "resources/js/app.tsx"
+      "resources/js/app.tsx",
+      "_Layout-CHcJZT3n.js"
     ],
     "css": [
-      "assets/app-BF1AQ3Vn.css"
+      "assets/app-C9AXhyWl.css"
     ]
   },
   "resources/js/pages/verify-email.tsx": {
-    "file": "assets/verify-email-0ojpu4Ct.js",
+    "file": "assets/verify-email-BZWkVPjM.js",
     "name": "verify-email",
     "src": "resources/js/pages/verify-email.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "resources/js/app.tsx"
+      "resources/js/app.tsx",
+      "_Layout-CHcJZT3n.js"
     ],
     "css": [
-      "assets/app-BF1AQ3Vn.css"
+      "assets/app-C9AXhyWl.css"
     ]
   },
   "resources/js/pages/welcome.tsx": {
-    "file": "assets/welcome-BCch4h_3.js",
+    "file": "assets/welcome-BQ1j2cD_.js",
     "name": "welcome",
     "src": "resources/js/pages/welcome.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "resources/js/app.tsx"
+      "resources/js/app.tsx",
+      "_Layout-CHcJZT3n.js"
     ],
     "css": [
-      "assets/app-BF1AQ3Vn.css"
+      "assets/app-C9AXhyWl.css"
     ]
   }
 }
