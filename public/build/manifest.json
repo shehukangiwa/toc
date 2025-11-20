@@ -1,22 +1,13 @@
 {
-<<<<<<< HEAD
-  "_Layout-DGaaqyta.js": {
-    "file": "assets/Layout-DGaaqyta.js",
-=======
-  "_Layout-CwId4qtH.js": {
-    "file": "assets/Layout-CwId4qtH.js",
->>>>>>> a2ebadb14ff6fcedbc22136c854e89d40ddd935e
+  "_Layout-CA63rYnu.js": {
+    "file": "assets/Layout-CA63rYnu.js",
     "name": "Layout",
     "imports": [
       "resources/js/app.tsx"
     ]
   },
   "resources/css/app.css": {
-<<<<<<< HEAD
-    "file": "assets/app-CAT_7pl4.css",
-=======
-    "file": "assets/app-B8j4s-Q8.css",
->>>>>>> a2ebadb14ff6fcedbc22136c854e89d40ddd935e
+    "file": "assets/app-DCer3aEa.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "names": [
@@ -24,11 +15,7 @@
     ]
   },
   "resources/js/app.tsx": {
-<<<<<<< HEAD
-    "file": "assets/app-BSqN9ozN.js",
-=======
-    "file": "assets/app-DLOGwyKo.js",
->>>>>>> a2ebadb14ff6fcedbc22136c854e89d40ddd935e
+    "file": "assets/app-ByZal7QB.js",
     "name": "app",
     "src": "resources/js/app.tsx",
     "isEntry": true,
@@ -39,107 +26,59 @@
       "resources/js/pages/welcome.tsx"
     ],
     "css": [
-<<<<<<< HEAD
-      "assets/app-CAT_7pl4.css"
+      "assets/app-DCer3aEa.css"
     ]
   },
   "resources/js/pages/register.tsx": {
-    "file": "assets/register-Bk0PMyVF.js",
-=======
-      "assets/app-B8j4s-Q8.css"
-    ]
-  },
-  "resources/js/pages/register.tsx": {
-    "file": "assets/register-CfursTf4.js",
->>>>>>> a2ebadb14ff6fcedbc22136c854e89d40ddd935e
+    "file": "assets/register-CYO7m7aq.js",
     "name": "register",
     "src": "resources/js/pages/register.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-<<<<<<< HEAD
-      "_Layout-DGaaqyta.js"
+      "_Layout-CA63rYnu.js"
     ],
     "css": [
-      "assets/app-CAT_7pl4.css"
+      "assets/app-DCer3aEa.css"
     ]
   },
   "resources/js/pages/registration-complete.tsx": {
-    "file": "assets/registration-complete-BWW6ohqj.js",
-=======
-      "_Layout-CwId4qtH.js"
-    ],
-    "css": [
-      "assets/app-B8j4s-Q8.css"
-    ]
-  },
-  "resources/js/pages/registration-complete.tsx": {
-    "file": "assets/registration-complete-BNtqxc5j.js",
->>>>>>> a2ebadb14ff6fcedbc22136c854e89d40ddd935e
+    "file": "assets/registration-complete-C8z7EuyN.js",
     "name": "registration-complete",
     "src": "resources/js/pages/registration-complete.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-<<<<<<< HEAD
-      "_Layout-DGaaqyta.js"
+      "_Layout-CA63rYnu.js"
     ],
     "css": [
-      "assets/app-CAT_7pl4.css"
+      "assets/app-DCer3aEa.css"
     ]
   },
   "resources/js/pages/verify-email.tsx": {
-    "file": "assets/verify-email-C5cTZDHB.js",
-=======
-      "_Layout-CwId4qtH.js"
-    ],
-    "css": [
-      "assets/app-B8j4s-Q8.css"
-    ]
-  },
-  "resources/js/pages/verify-email.tsx": {
-    "file": "assets/verify-email-p-YnNZ_g.js",
->>>>>>> a2ebadb14ff6fcedbc22136c854e89d40ddd935e
+    "file": "assets/verify-email-D4cNfWDg.js",
     "name": "verify-email",
     "src": "resources/js/pages/verify-email.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-<<<<<<< HEAD
-      "_Layout-DGaaqyta.js"
+      "_Layout-CA63rYnu.js"
     ],
     "css": [
-      "assets/app-CAT_7pl4.css"
+      "assets/app-DCer3aEa.css"
     ]
   },
   "resources/js/pages/welcome.tsx": {
-    "file": "assets/welcome-TdcwQwhi.js",
-=======
-      "_Layout-CwId4qtH.js"
-    ],
-    "css": [
-      "assets/app-B8j4s-Q8.css"
-    ]
-  },
-  "resources/js/pages/welcome.tsx": {
-    "file": "assets/welcome-LOFJhcm7.js",
->>>>>>> a2ebadb14ff6fcedbc22136c854e89d40ddd935e
+    "file": "assets/welcome-CDeEiVcL.js",
     "name": "welcome",
     "src": "resources/js/pages/welcome.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-<<<<<<< HEAD
-      "_Layout-DGaaqyta.js"
+      "_Layout-CA63rYnu.js"
     ],
     "css": [
-      "assets/app-CAT_7pl4.css"
-=======
-      "_Layout-CwId4qtH.js"
-    ],
-    "css": [
-      "assets/app-B8j4s-Q8.css"
->>>>>>> a2ebadb14ff6fcedbc22136c854e89d40ddd935e
+      "assets/app-DCer3aEa.css"
     ]
   }
 }
