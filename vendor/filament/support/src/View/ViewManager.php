@@ -18,8 +18,6 @@ class ViewManager
 
     protected bool $hasSpaMode = false;
 
-    protected bool $hasSpaPrefetching = false;
-
     /**
      * @var array<string>
      */
@@ -42,38 +40,13 @@ class ViewManager
     /**
      * @param  string | array<string> | null  $scopes
      */
-    public function hasRenderHook(string $name, string | array | null $scopes = null): bool
-    {
-        if (! isset($this->renderHooks[$name])) {
-            return false;
-        }
-
-        if (isset($this->renderHooks[$name][null]) && count($this->renderHooks[$name][null])) {
-            return true;
-        }
-
-        $scopes = Arr::wrap($scopes);
-
-        foreach ($scopes as $scopeName) {
-            if (isset($this->renderHooks[$name][$scopeName]) && count($this->renderHooks[$name][$scopeName])) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * @param  string | array<string> | null  $scopes
-     * @param  array<string, mixed>  $data
-     */
-    public function renderHook(string $name, string | array | null $scopes = null, array $data = []): Htmlable
+    public function renderHook(string $name, string | array | null $scopes = null): Htmlable
     {
         $renderedHooks = [];
 
         $scopes = Arr::wrap($scopes);
 
-        $renderHook = function (callable $hook) use (&$renderedHooks, $scopes, $data): ?string {
+        $renderHook = function (callable $hook) use (&$renderedHooks, $scopes): ?string {
             $hookId = spl_object_id($hook);
 
             if (in_array($hookId, $renderedHooks)) {
@@ -82,9 +55,7 @@ class ViewManager
 
             $renderedHooks[] = $hookId;
 
-            $result = app()->call($hook, ['data' => $data, 'scopes' => $scopes]);
-
-            return (string) $result;
+            return (string) app()->call($hook, ['scopes' => $scopes]);
         };
 
         $hooks = array_map(
@@ -105,10 +76,9 @@ class ViewManager
         return new HtmlString(implode('', $hooks));
     }
 
-    public function spa(bool $condition = true, bool $hasPrefetching = false): void
+    public function spa(bool $condition = true): void
     {
         $this->hasSpaMode = $condition;
-        $this->hasSpaPrefetching = $hasPrefetching;
     }
 
     /**
@@ -137,10 +107,5 @@ class ViewManager
         }
 
         return is_app_url($url);
-    }
-
-    public function hasSpaPrefetching(): bool
-    {
-        return $this->hasSpaPrefetching;
     }
 }

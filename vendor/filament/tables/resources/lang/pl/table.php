@@ -2,21 +2,9 @@
 
 return [
 
-    'column_manager' => [
+    'column_toggle' => [
 
         'heading' => 'Kolumny',
-
-        'actions' => [
-
-            'apply' => [
-                'label' => 'Zastosuj kolumny',
-            ],
-
-            'reset' => [
-                'label' => 'Zresetuj',
-            ],
-
-        ],
 
     ],
 
@@ -24,20 +12,6 @@ return [
 
         'actions' => [
             'label' => 'Akcja|Akcje',
-        ],
-
-        'select' => [
-
-            'loading_message' => 'Ładowanie...',
-
-            'no_search_results_message' => 'Brak wyników.',
-
-            'placeholder' => 'Wybierz opcję',
-
-            'searching_message' => 'Ładowanie...',
-
-            'search_prompt' => 'Zacznij pisać, aby wyszukać...',
-
         ],
 
         'text' => [
@@ -125,7 +99,7 @@ return [
             'label' => 'Akcje masowe',
         ],
 
-        'column_manager' => [
+        'toggle_columns' => [
             'label' => 'Wybierz kolumny',
         ],
 
@@ -172,10 +146,6 @@ return [
 
         'select' => [
             'placeholder' => 'Wszystkie',
-
-            'relationship' => [
-                'empty_option_label' => 'Brak',
-            ],
         ],
 
         'trashed' => [
@@ -198,6 +168,7 @@ return [
 
             'group' => [
                 'label' => 'Grupuj według',
+                'placeholder' => 'Grupuj według',
             ],
 
             'direction' => [
@@ -257,7 +228,5 @@ return [
         ],
 
     ],
-
-    'default_model_label' => 'rekord',
 
 ];

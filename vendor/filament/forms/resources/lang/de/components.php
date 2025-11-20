@@ -281,7 +281,7 @@ return [
 
     'markdown_editor' => [
 
-        'tools' => [
+        'toolbar_buttons' => [
             'attach_files' => 'Dateien beifügen',
             'blockquote' => 'Zitat',
             'bold' => 'Fett',
@@ -295,28 +295,6 @@ return [
             'strike' => 'Durchgestrichen',
             'table' => 'Tabelle',
             'undo' => 'Rückgängig',
-        ],
-
-    ],
-
-    'modal_table_select' => [
-
-        'actions' => [
-
-            'select' => [
-
-                'label' => 'Auswählen',
-
-                'actions' => [
-
-                    'select' => [
-                        'label' => 'Auswählen',
-                    ],
-
-                ],
-
-            ],
-
         ],
 
     ],
@@ -384,98 +362,6 @@ return [
 
     'rich_editor' => [
 
-        'actions' => [
-
-            'attach_files' => [
-
-                'label' => 'Datei hochladen',
-
-                'modal' => [
-
-                    'heading' => 'Datei hochladen',
-
-                    'form' => [
-
-                        'file' => [
-
-                            'label' => [
-                                'new' => 'Datei',
-                                'existing' => 'Datei ersetzen',
-                            ],
-
-                        ],
-
-                        'alt' => [
-
-                            'label' => [
-                                'new' => 'Alt-Text',
-                                'existing' => 'Alt-Text ändern',
-                            ],
-
-                        ],
-
-                    ],
-
-                    'actions' => [
-
-                        'save' => [
-                            'label' => 'Speichern',
-                        ],
-
-                    ],
-
-                ],
-
-            ],
-
-            'custom_block' => [
-
-                'modal' => [
-
-                    'actions' => [
-
-                        'insert' => [
-                            'label' => 'Einfügen',
-                        ],
-
-                        'save' => [
-                            'label' => 'Speichern',
-                        ],
-
-                    ],
-
-                ],
-
-            ],
-
-            'link' => [
-
-                'label' => 'Bearbeiten',
-
-                'modal' => [
-
-                    'heading' => 'Link',
-
-                    'form' => [
-
-                        'url' => [
-                            'label' => 'URL',
-                        ],
-
-                        'should_open_in_new_tab' => [
-                            'label' => 'In neuem Tab öffnen',
-                        ],
-
-                    ],
-
-                ],
-
-            ],
-
-        ],
-
-        'no_merge_tag_search_results_message' => 'Keine Ergebnisse für Merge-Tags.',
-
         'dialogs' => [
 
             'link' => [
@@ -493,45 +379,20 @@ return [
 
         ],
 
-        'tools' => [
-            'align_center' => 'Zentriert ausrichten',
-            'align_end' => 'Rechts ausrichten',
-            'align_justify' => 'Blocksatz',
-            'align_start' => 'Links ausrichten',
+        'toolbar_buttons' => [
             'attach_files' => 'Dateien anhängen',
             'blockquote' => 'Zitat',
             'bold' => 'Fett',
             'bullet_list' => 'Aufzählungsliste',
-            'clear_formatting' => 'Formatierung löschen',
             'code_block' => 'Code Block',
-            'custom_blocks' => 'Blöcke',
-            'details' => 'Details',
             'h1' => 'Titel',
             'h2' => 'Überschrift',
             'h3' => 'Unterüberschrift',
-            'highlight' => 'Hervorheben',
-            'horizontal_rule' => 'Horizontale Linie',
             'italic' => 'Kursiv',
-            'lead' => 'Einleitungstext',
             'link' => 'Link',
-            'merge_tags' => 'Merge-Tags',
             'ordered_list' => 'Nummerierte Aufzählung',
             'redo' => 'Wiederherstellen',
-            'small' => 'Kleiner Text',
             'strike' => 'Durchgestrichen',
-            'subscript' => 'Tiefgestellt',
-            'superscript' => 'Hochgestellt',
-            'table' => 'Tabelle',
-            'table_delete' => 'Tabelle löschen',
-            'table_add_column_before' => 'Spalte davor einfügen',
-            'table_add_column_after' => 'Spalte danach einfügen',
-            'table_delete_column' => 'Spalte löschen',
-            'table_add_row_before' => 'Zeile davor einfügen',
-            'table_add_row_after' => 'Zeile danach einfügen',
-            'table_delete_row' => 'Zeile löschen',
-            'table_merge_cells' => 'Zellen verbinden',
-            'table_split_cell' => 'Zelle teilen',
-            'table_toggle_header_row' => 'Kopfzeile umschalten',
             'underline' => 'Unterstreichen',
             'undo' => 'Rückgängig',
         ],
@@ -543,8 +404,6 @@ return [
         'actions' => [
 
             'create_option' => [
-
-                'label' => 'Erstellen',
 
                 'modal' => [
 
@@ -568,8 +427,6 @@ return [
 
             'edit_option' => [
 
-                'label' => 'Bearbeiten',
-
                 'modal' => [
 
                     'heading' => 'Bearbeiten',
@@ -577,11 +434,12 @@ return [
                     'actions' => [
 
                         'save' => [
+
                             'label' => 'Speichern',
+
                         ],
 
                     ],
-
                 ],
 
             ],
@@ -632,6 +490,22 @@ return [
         'boolean' => [
             'true' => 'Ja',
             'false' => 'Nein',
+        ],
+
+    ],
+
+    'wizard' => [
+
+        'actions' => [
+
+            'previous_step' => [
+                'label' => 'Zurück',
+            ],
+
+            'next_step' => [
+                'label' => 'Weiter',
+            ],
+
         ],
 
     ],

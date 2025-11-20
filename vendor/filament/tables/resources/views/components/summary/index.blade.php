@@ -15,7 +15,7 @@
 @php
     use Filament\Support\Enums\Alignment;
     use Filament\Tables\Columns\Column;
-    use Filament\Tables\Enums\RecordActionsPosition;
+    use Filament\Tables\Enums\ActionsPosition;
     use Filament\Tables\Enums\RecordCheckboxPosition;
 
     if ($groupsOnly && $groupColumn) {
@@ -31,8 +31,10 @@
 @endphp
 
 @if ($hasPageSummary)
-    <tr class="fi-ta-row fi-ta-summary-header-row fi-striped">
-        @if ($placeholderColumns && $actions && in_array($actionsPosition, [RecordActionsPosition::BeforeCells, RecordActionsPosition::BeforeColumns]))
+    <x-filament-tables::row
+        class="fi-ta-summary-header-row bg-gray-50 dark:bg-white/5"
+    >
+        @if ($placeholderColumns && $actions && in_array($actionsPosition, [ActionsPosition::BeforeCells, ActionsPosition::BeforeColumns]))
             <td></td>
         @endif
 
@@ -41,9 +43,9 @@
         @endif
 
         @if ($extraHeadingColumn)
-            <td class="fi-ta-cell fi-ta-summary-header-cell">
+            <x-filament-tables::summary.header-cell>
                 {{ __('filament-tables::table.summary.heading', ['label' => $pluralModelLabel]) }}
-            </td>
+            </x-filament-tables::summary.header-cell>
         @endif
 
         @foreach ($columns as $column)
@@ -62,32 +64,41 @@
                     $hasColumnHeaderLabel = (! $placeholderColumns) || $columnHasSummary;
                 @endphp
 
-                <td
-                    {{
-                        $column->getExtraHeaderAttributeBag()->class([
-                            'fi-ta-cell fi-ta-summary-header-cell',
-                            'fi-wrapped' => $column->canHeaderWrap(),
-                            (($alignment instanceof Alignment) ? "fi-align-{$alignment->value}" : (is_string($alignment) ? $alignment : '')) => (! ($loop->first && (! $extraHeadingColumn))) && $hasColumnHeaderLabel,
-                        ])
-                    }}
+                <x-filament-tables::summary.header-cell
+                    :attributes="
+                        \Filament\Support\prepare_inherited_attributes($column->getExtraHeaderAttributeBag())
+                            ->class([
+                                'whitespace-nowrap' => ! $column->isHeaderWrapped(),
+                                'whitespace-normal' => $column->isHeaderWrapped(),
+                                match ($alignment) {
+                                    Alignment::Start => 'text-start',
+                                    Alignment::Center => 'text-center',
+                                    Alignment::End => 'text-end',
+                                    Alignment::Left => 'text-left',
+                                    Alignment::Right => 'text-right',
+                                    Alignment::Justify, Alignment::Between => 'text-justify',
+                                    default => $alignment,
+                                } => (! ($loop->first && (! $extraHeadingColumn))) && $hasColumnHeaderLabel,
+                            ])
+                    "
                 >
                     @if ($loop->first && (! $extraHeadingColumn))
                         {{ __('filament-tables::table.summary.heading', ['label' => $pluralModelLabel]) }}
                     @elseif ($hasColumnHeaderLabel)
                         {{ $column->getLabel() }}
                     @endif
-                </td>
+                </x-filament-tables::summary.header-cell>
             @endif
         @endforeach
 
-        @if ($placeholderColumns && $actions && in_array($actionsPosition, [RecordActionsPosition::AfterColumns, RecordActionsPosition::AfterCells]))
+        @if ($placeholderColumns && $actions && in_array($actionsPosition, [ActionsPosition::AfterColumns, ActionsPosition::AfterCells]))
             <td></td>
         @endif
 
         @if ($placeholderColumns && $selectionEnabled && $recordCheckboxPosition === RecordCheckboxPosition::AfterCells)
             <td></td>
         @endif
-    </tr>
+    </x-filament-tables::row>
 
     @php
         $selectedState = $this->getTableSummarySelectedState($pageTableSummaryQuery)[0] ?? [];
@@ -124,6 +135,6 @@
     :selected-state="$selectedState"
     :selection-enabled="$selectionEnabled"
     @class([
-        'fi-striped' => ! $hasPageSummary,
+        'bg-gray-50 dark:bg-white/5' => ! $hasPageSummary,
     ])
 />

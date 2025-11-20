@@ -3,11 +3,9 @@
 namespace Filament\Tables\Table\Concerns;
 
 use Closure;
-use Filament\Actions\Action;
 use Filament\Support\Concerns\HasReorderAnimationDuration;
 use Filament\Support\Facades\FilamentIcon;
-use Filament\Support\Icons\Heroicon;
-use Filament\Tables\View\TablesIconAlias;
+use Filament\Tables\Actions\Action;
 
 trait CanReorderRecords
 {
@@ -19,8 +17,6 @@ trait CanReorderRecords
 
     protected string | Closure | null $reorderColumn = null;
 
-    protected string | Closure | null $reorderDirection = null;
-
     protected ?Closure $modifyReorderRecordsTriggerActionUsing = null;
 
     public function reorderRecordsTriggerAction(?Closure $callback): static
@@ -30,15 +26,13 @@ trait CanReorderRecords
         return $this;
     }
 
-    public function reorderable(string | Closure | null $column = null, bool | Closure | null $condition = null, string | Closure | null $direction = null): static
+    public function reorderable(string | Closure | null $column = null, bool | Closure | null $condition = null): static
     {
         $this->reorderColumn = $column;
 
         if ($condition !== null) {
             $this->isReorderable = $condition;
         }
-
-        $this->reorderDirection = $direction;
 
         return $this;
     }
@@ -55,11 +49,10 @@ trait CanReorderRecords
         $action = Action::make('reorderRecords')
             ->label($isReordering ? __('filament-tables::table.actions.disable_reordering.label') : __('filament-tables::table.actions.enable_reordering.label'))
             ->iconButton()
-            ->icon($isReordering ? (FilamentIcon::resolve(TablesIconAlias::ACTIONS_DISABLE_REORDERING) ?? Heroicon::Check) : (FilamentIcon::resolve(TablesIconAlias::ACTIONS_ENABLE_REORDERING) ?? Heroicon::ArrowsUpDown))
+            ->icon($isReordering ? (FilamentIcon::resolve('tables::actions.disable-reordering') ?? 'heroicon-m-check') : (FilamentIcon::resolve('tables::actions.enable-reordering') ?? 'heroicon-m-arrows-up-down'))
             ->color('gray')
             ->action('toggleTableReordering')
-            ->table($this)
-            ->authorize(true);
+            ->table($this);
 
         if ($this->modifyReorderRecordsTriggerActionUsing) {
             $action = $this->evaluate($this->modifyReorderRecordsTriggerActionUsing, [
@@ -68,19 +61,12 @@ trait CanReorderRecords
             ]) ?? $action;
         }
 
-        $action->extraAttributes(['class' => 'fi-force-enabled'], merge: true);
-
         return $action;
     }
 
     public function getReorderColumn(): ?string
     {
         return $this->evaluate($this->reorderColumn);
-    }
-
-    public function getReorderDirection(): string
-    {
-        return $this->evaluate($this->reorderDirection) ?? 'asc';
     }
 
     public function isReorderable(): bool

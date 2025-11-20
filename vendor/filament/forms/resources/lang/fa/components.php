@@ -12,62 +12,14 @@ return [
 
             'add' => [
                 'label' => 'افزودن به :label',
-
-                'modal' => [
-
-                    'heading' => 'افزودن به :label',
-
-                    'actions' => [
-
-                        'add' => [
-                            'label' => 'افزودن',
-                        ],
-
-                    ],
-
-                ],
             ],
 
             'add_between' => [
                 'label' => 'قراردادن',
-
-                'modal' => [
-
-                    'heading' => 'افزودن به :label',
-
-                    'actions' => [
-
-                        'add' => [
-                            'label' => 'افزودن',
-                        ],
-
-                    ],
-
-                ],
             ],
 
             'delete' => [
                 'label' => 'حذف',
-            ],
-
-            'edit' => [
-
-                'label' => 'ویرایش',
-
-                'modal' => [
-
-                    'heading' => 'ویرایش',
-
-                    'actions' => [
-
-                        'save' => [
-                            'label' => 'ذخیره تغییرات',
-                        ],
-
-                    ],
-
-                ],
-
             ],
 
             'reorder' => [
@@ -280,7 +232,7 @@ return [
 
     'markdown_editor' => [
 
-        'tools' => [
+        'toolbar_buttons' => [
             'attach_files' => 'پیوستن فایل ها',
             'blockquote' => 'نقل قول',
             'bold' => 'پررنگ',
@@ -297,27 +249,7 @@ return [
         ],
 
     ],
-    'modal_table_select' => [
 
-        'actions' => [
-
-            'select' => [
-
-                'label' => 'انتخاب',
-
-                'actions' => [
-
-                    'select' => [
-                        'label' => 'انتخاب کردن',
-                    ],
-
-                ],
-
-            ],
-
-        ],
-
-    ],
     'radio' => [
 
         'boolean' => [
@@ -380,127 +312,38 @@ return [
     ],
 
     'rich_editor' => [
-        'actions' => [
 
-            'attach_files' => [
-
-                'label' => 'بارگذاری فایل',
-
-                'modal' => [
-
-                    'heading' => 'بارگذاری فایل',
-
-                    'form' => [
-
-                        'file' => [
-
-                            'label' => [
-                                'new' => 'فایل',
-                                'existing' => 'جایگزینی فایل',
-                            ],
-
-                        ],
-
-                        'alt' => [
-
-                            'label' => [
-                                'new' => 'متن جایگزین',
-                                'existing' => 'تغییر متن جایگزین',
-                            ],
-
-                        ],
-
-                    ],
-
-                ],
-
-            ],
-
-            'custom_block' => [
-
-                'modal' => [
-
-                    'actions' => [
-
-                        'insert' => [
-                            'label' => 'درج',
-                        ],
-
-                        'save' => [
-                            'label' => 'ذخیره',
-                        ],
-
-                    ],
-
-                ],
-
-            ],
+        'dialogs' => [
 
             'link' => [
 
-                'label' => 'ویرایش',
-
-                'modal' => [
-
-                    'heading' => 'لینک',
-
-                    'form' => [
-
-                        'url' => [
-                            'label' => 'آدرس اینترنتی',
-                        ],
-
-                        'should_open_in_new_tab' => [
-                            'label' => 'بازکردن در برگه جدید',
-                        ],
-
-                    ],
-
+                'actions' => [
+                    'link' => 'لینک',
+                    'unlink' => 'لغو لینک',
                 ],
+
+                'label' => 'آدرس اینترنتی',
+
+                'placeholder' => 'یک آدرس اینترنتی وارد کنید',
 
             ],
 
         ],
 
-        'no_merge_tag_search_results_message' => 'هیچ نتیجه‌ای برای جستجوی برچسب ادغام یافت نشد.',
-
-        'tools' => [
-            'align_center' => 'تراز وسط',
-            'align_end' => 'تراز انتها',
-            'align_justify' => 'تراز کامل',
-            'align_start' => 'تراز ابتدا',
+        'toolbar_buttons' => [
             'attach_files' => 'پیوستن فایل ها',
             'blockquote' => 'نقل قول',
             'bold' => 'پررنگ',
             'bullet_list' => 'لیست نامرتب',
-            'clear_formatting' => 'پاک کردن قالب بندی',
-            'code' => 'کد',
             'code_block' => 'بلوک کد',
             'h1' => 'عنوان اصلی',
             'h2' => 'عنوان فرعی',
             'h3' => 'زیرعنوان',
-            'highlight' => 'برجسته‌سازی',
-            'horizontal_rule' => 'خط افقی',
             'italic' => 'مورب',
             'link' => 'لینک',
-            'merge_tags' => 'برچسب‌های ادغام',
             'ordered_list' => 'لیست مرتب',
             'redo' => 'جلو',
-            'small' => 'متن کوچک',
             'strike' => 'خط زده',
-            'subscript' => 'زیرنویس',
-            'superscript' => 'بالانویس',
-            'table' => 'جدول',
-            'table_delete' => 'حذف جدول',
-            'table_add_column_before' => 'افزودن ستون قبل',
-            'table_add_column_after' => 'افزودن ستون بعد',
-            'table_delete_column' => 'حذف ستون',
-            'table_add_row_before' => 'افزودن ردیف بالا',
-            'table_add_row_after' => 'افزودن ردیف پایین',
-            'table_delete_row' => 'حذف ردیف',
-            'table_merge_cells' => 'ادغام سلول‌ها',
-            'table_split_cell' => 'تقسیم سلول',
-            'table_toggle_header_row' => 'تغییر ردیف سرستون',
             'underline' => 'زیرخط',
             'undo' => 'عقب',
         ],
@@ -512,8 +355,6 @@ return [
         'actions' => [
 
             'create_option' => [
-
-                'label' => 'ایجاد',
 
                 'modal' => [
 
@@ -538,8 +379,6 @@ return [
             'edit_option' => [
 
                 'modal' => [
-
-                    'label' => 'ویرایش',
 
                     'heading' => 'ویرایش',
 
@@ -601,6 +440,22 @@ return [
         'boolean' => [
             'true' => 'بله',
             'false' => 'خیر',
+        ],
+
+    ],
+
+    'wizard' => [
+
+        'actions' => [
+
+            'previous_step' => [
+                'label' => 'قبلی',
+            ],
+
+            'next_step' => [
+                'label' => 'بعدی',
+            ],
+
         ],
 
     ],

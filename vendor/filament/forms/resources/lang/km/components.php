@@ -91,11 +91,11 @@ return [
             ],
 
             'collapse_all' => [
-                'label' => 'ដួលរលំទាំងអស់',
+                'label' => 'ដួលរលំទាំងអស់។',
             ],
 
             'expand_all' => [
-                'label' => 'ពង្រីកទាំងអស់',
+                'label' => 'ពង្រីកទាំងអស់។',
             ],
 
         ],
@@ -280,7 +280,7 @@ return [
 
     'markdown_editor' => [
 
-        'tools' => [
+        'toolbar_buttons' => [
             'attach_files' => 'ភ្ជាប់ឯកសារ',
             'blockquote' => 'ប្លុកសម្រង់',
             'bold' => 'ដិត',
@@ -348,11 +348,11 @@ return [
             ],
 
             'collapse_all' => [
-                'label' => 'ដួលរលំទាំងអស់',
+                'label' => 'ដួលរលំទាំងអស់។',
             ],
 
             'expand_all' => [
-                'label' => 'ពង្រីកទាំងអស់',
+                'label' => 'ពង្រីកទាំងអស់។',
             ],
 
         ],
@@ -378,7 +378,7 @@ return [
 
         ],
 
-        'tools' => [
+        'toolbar_buttons' => [
             'attach_files' => 'ភ្ជាប់ឯកសារ',
             'blockquote' => 'ប្លុកសម្រង់',
             'bold' => 'ដិត',
@@ -468,7 +468,7 @@ return [
     ],
 
     'tags_input' => [
-        'placeholder' => 'ស្លាកថ្មី',
+        'placeholder' => 'ស្លាកថ្មី។',
     ],
 
     'text_input' => [
@@ -492,6 +492,22 @@ return [
         'boolean' => [
             'true' => 'បាទ',
             'false' => 'ទេ',
+        ],
+
+    ],
+
+    'wizard' => [
+
+        'actions' => [
+
+            'previous_step' => [
+                'label' => 'ត្រឡប់មកវិញ',
+            ],
+
+            'next_step' => [
+                'label' => 'បន្ទាប់',
+            ],
+
         ],
 
     ],

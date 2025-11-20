@@ -2,28 +2,13 @@
 
 return [
 
-    'column_manager' => [
+    'column_toggle' => [
 
         'heading' => 'ستون‌ها',
 
-        'actions' => [
-
-            'apply' => [
-                'label' => 'اعمال ستون‌ها',
-            ],
-
-            'reset' => [
-                'label' => 'بازنشانی ستون‌ها',
-            ],
-
-        ],
     ],
 
     'columns' => [
-
-        'actions' => [
-            'label' => 'عملیات|عملیات‌ها',
-        ],
 
         'text' => [
 
@@ -110,7 +95,7 @@ return [
             'label' => 'عملیات گروهی',
         ],
 
-        'column_manager' => [
+        'toggle_columns' => [
             'label' => 'باز / بستن ستون‌ها',
         ],
 
@@ -156,12 +141,7 @@ return [
         ],
 
         'select' => [
-
             'placeholder' => 'همه',
-
-            'relationship' => [
-                'empty_option_label' => 'هیچ',
-            ],
         ],
 
         'trashed' => [
@@ -244,7 +224,5 @@ return [
         ],
 
     ],
-
-    'default_model_label' => 'رکورد',
 
 ];

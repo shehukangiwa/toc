@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait CanSortRecords
 {
-    public ?string $tableSort = null;
+    public ?string $tableSortColumn = null;
+
+    public ?string $tableSortDirection = null;
 
     public function sortTable(?string $column = null, ?string $direction = null): void
     {
-        if ($column === $this->getTableSortColumn()) {
-            $direction ??= match ($this->getTableSortDirection()) {
+        if ($column === $this->tableSortColumn) {
+            $direction ??= match ($this->tableSortDirection) {
                 'asc' => 'desc',
                 'desc' => null,
                 default => 'asc',
@@ -20,43 +22,31 @@ trait CanSortRecords
             $direction ??= 'asc';
         }
 
-        $this->tableSort = $direction ? "{$column}:{$direction}" : null;
+        $this->tableSortColumn = $direction ? $column : null;
+        $this->tableSortDirection = $direction;
 
-        $this->updatedTableSort();
+        $this->updatedTableSortColumn();
     }
 
     public function getTableSortColumn(): ?string
     {
-        if (blank($this->tableSort)) {
-            return null;
-        }
-
-        return (string) str($this->tableSort)->before(':');
+        return $this->tableSortColumn;
     }
 
     public function getTableSortDirection(): ?string
     {
-        if (blank($this->tableSort)) {
-            return null;
-        }
-
-        if (! str($this->tableSort)->contains(':')) {
-            return 'asc';
-        }
-
-        return match ((string) str($this->tableSort)->after(':')) {
-            'asc' => 'asc',
-            'desc' => 'desc',
-            default => null,
-        };
+        return $this->tableSortDirection;
     }
 
-    public function updatedTableSort(): void
+    public function updatedTableSortColumn(): void
     {
         if ($this->getTable()->persistsSortInSession()) {
             session()->put(
                 $this->getTableSortSessionKey(),
-                $this->tableSort,
+                [
+                    'column' => $this->tableSortColumn,
+                    'direction' => $this->tableSortDirection,
+                ],
             );
         }
 
@@ -68,7 +58,10 @@ trait CanSortRecords
         if ($this->getTable()->persistsSortInSession()) {
             session()->put(
                 $this->getTableSortSessionKey(),
-                $this->tableSort,
+                [
+                    'column' => $this->tableSortColumn,
+                    'direction' => $this->tableSortDirection,
+                ],
             );
         }
 
@@ -82,24 +75,35 @@ trait CanSortRecords
         }
 
         if ($this->isTableReordering()) {
-            return $query->orderBy($this->getTable()->getReorderColumn(), $this->getTable()->getReorderDirection());
+            return $query->orderBy($this->getTable()->getReorderColumn());
         }
 
-        if (
-            $this->getTableSortColumn() &&
-            $column = $this->getTable()->getSortableVisibleColumn($this->getTableSortColumn())
-        ) {
-            $sortDirection = $this->getTableSortDirection() === 'desc' ? 'desc' : 'asc';
-
-            $column->applySort($query, $sortDirection);
+        if (! $this->tableSortColumn) {
+            return $this->applyDefaultSortingToTableQuery($query);
         }
 
-        $sortDirection = ($this->getTable()->getDefaultSortDirection() ?? $this->getTableSortDirection()) === 'desc' ? 'desc' : 'asc';
+        $column = $this->getTable()->getSortableVisibleColumn($this->tableSortColumn);
+
+        if (! $column) {
+            return $this->applyDefaultSortingToTableQuery($query);
+        }
+
+        $sortDirection = $this->tableSortDirection === 'desc' ? 'desc' : 'asc';
+
+        $column->applySort($query, $sortDirection);
+
+        $this->applyDefaultKeySortToTableQuery($query);
+
+        return $query;
+    }
+
+    protected function applyDefaultSortingToTableQuery(Builder $query): Builder
+    {
+        $sortDirection = ($this->getTable()->getDefaultSortDirection() ?? $this->tableSortDirection) === 'desc' ? 'desc' : 'asc';
         $defaultSort = $this->getTable()->getDefaultSort($query, $sortDirection);
 
         if (
             is_string($defaultSort) &&
-            ($defaultSort !== $this->getTableSortColumn()) &&
             ($sortColumn = $this->getTable()->getSortableVisibleColumn($defaultSort))
         ) {
             $sortColumn->applySort($query, $sortDirection);
@@ -111,13 +115,24 @@ trait CanSortRecords
             $query = $defaultSort;
         }
 
+        if (filled($query->toBase()->orders)) {
+            $this->applyDefaultKeySortToTableQuery($query);
+
+            return $query;
+        }
+
+        return $query->orderBy($query->getModel()->getQualifiedKeyName());
+    }
+
+    protected function applyDefaultKeySortToTableQuery(Builder $query): Builder
+    {
         if (! $this->getTable()->hasDefaultKeySort()) {
             return $query;
         }
 
         $qualifiedKeyName = $query->getModel()->getQualifiedKeyName();
 
-        foreach ($query->getQuery()->orders ?? [] as $order) {
+        foreach ($query->toBase()->orders ?? [] as $order) { /** @phpstan-ignore nullCoalesce.property */
             if (($order['column'] ?? null) === $qualifiedKeyName) {
                 return $query;
             }
@@ -133,7 +148,9 @@ trait CanSortRecords
             }
         }
 
-        return $query->orderBy($qualifiedKeyName, $sortDirection);
+        $query->orderBy($qualifiedKeyName);
+
+        return $query;
     }
 
     /**

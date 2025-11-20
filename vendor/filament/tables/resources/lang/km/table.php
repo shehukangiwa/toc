@@ -2,7 +2,7 @@
 
 return [
 
-    'column_manager' => [
+    'column_toggle' => [
 
         'heading' => 'ជួរឈរ',
 
@@ -99,7 +99,7 @@ return [
             'label' => 'សកម្មភាពភាគច្រើន',
         ],
 
-        'column_manager' => [
+        'toggle_columns' => [
             'label' => 'បិទ/បើកជួរឈរ',
         ],
 
@@ -109,7 +109,7 @@ return [
 
         'heading' => 'គ្មាន​​ :model',
 
-        'description' => 'បង្កើត​ :model មួយដើម្បីចាប់ផ្តើម។',
+        'description' => 'បង្កើត​ :model មួយដើម្បីចាប់ផ្តើម។.',
 
     ],
 
@@ -141,11 +141,11 @@ return [
         'indicator' => 'តម្រងសកម្ម',
 
         'multi_select' => [
-            'placeholder' => 'ទាំងអស់',
+            'placeholder' => 'ទាំងអស់។',
         ],
 
         'select' => [
-            'placeholder' => 'ទាំងអស់',
+            'placeholder' => 'ទាំងអស់។',
         ],
 
         'trashed' => [

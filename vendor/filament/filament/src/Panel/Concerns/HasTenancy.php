@@ -3,16 +3,10 @@
 namespace Filament\Panel\Concerns;
 
 use Closure;
-use Filament\Actions\Action;
-use Filament\Billing\Providers\Contracts\BillingProvider;
-use Filament\Facades\Filament;
+use Filament\Billing\Providers\Contracts\Provider as BillingProvider;
 use Filament\Navigation\MenuItem;
-use Filament\Support\Facades\FilamentIcon;
-use Filament\Support\Icons\Heroicon;
-use Filament\View\PanelsIconAlias;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 trait HasTenancy
@@ -23,15 +17,10 @@ trait HasTenancy
 
     protected bool | Closure $hasTenantMenu = true;
 
-    protected bool | Closure | null $isTenantMenuSearchable = null;
-
     protected ?string $tenantRoutePrefix = null;
 
     protected ?string $tenantDomain = null;
 
-    /**
-     * @var class-string<Model>|null
-     */
     protected ?string $tenantModel = null;
 
     protected ?string $tenantProfilePage = null;
@@ -43,7 +32,7 @@ trait HasTenancy
     protected ?string $tenantOwnershipRelationshipName = null;
 
     /**
-     * @var array<Action | Closure | MenuItem>
+     * @var array<MenuItem>
      */
     protected array $tenantMenuItems = [];
 
@@ -57,7 +46,7 @@ trait HasTenancy
     }
 
     /**
-     * @param  array<Action | Closure | MenuItem>  $items
+     * @param  array<MenuItem>  $items
      */
     public function tenantMenuItems(array $items): static
     {
@@ -69,13 +58,6 @@ trait HasTenancy
         return $this;
     }
 
-    public function searchableTenantMenu(bool | Closure | null $condition = true): static
-    {
-        $this->isTenantMenuSearchable = $condition;
-
-        return $this;
-    }
-
     public function tenantMenu(bool | Closure $condition = true): static
     {
         $this->hasTenantMenu = $condition;
@@ -83,9 +65,6 @@ trait HasTenancy
         return $this;
     }
 
-    /**
-     * @param  class-string<Model>|null  $model
-     */
     public function tenant(?string $model, ?string $slugAttribute = null, ?string $ownershipRelationship = null): static
     {
         $this->tenantModel = $model;
@@ -216,9 +195,6 @@ trait HasTenancy
         return $record;
     }
 
-    /**
-     * @return class-string<Model>|null
-     */
     public function getTenantModel(): ?string
     {
         return $this->tenantModel;
@@ -273,117 +249,20 @@ trait HasTenancy
         return (bool) $this->evaluate($this->hasTenantMenu);
     }
 
-    protected function getTenantProfileMenuItem(Action | Closure | MenuItem | null $item = null): Action
-    {
-        $currentTenant = Filament::getTenant();
-
-        $page = Filament::getTenantProfilePage();
-
-        $action = Action::make('profile')
-            ->label($page ? $page::getLabel() : Filament::getTenantName($currentTenant))
-            ->icon(FilamentIcon::resolve(PanelsIconAlias::TENANT_MENU_PROFILE_BUTTON) ?? Heroicon::Cog6Tooth)
-            ->url($url = Filament::getTenantProfileUrl())
-            ->visible(filament()->hasTenantProfile() && filled($url) && (blank($page) || $page::canView($currentTenant)))
-            ->sort(-2);
-
-        if ($item instanceof MenuItem) {
-            return $item->toAction($action);
-        }
-
-        return $this->evaluate($item, [
-            'action' => $action,
-        ]) ?? $action;
-    }
-
-    protected function getTenantBillingMenuItem(Action | Closure | MenuItem | null $item = null): Action
-    {
-        $action = Action::make('billing')
-            ->label(__('filament-panels::layout.actions.billing.label'))
-            ->color('gray')
-            ->icon(FilamentIcon::resolve(PanelsIconAlias::TENANT_MENU_BILLING_BUTTON) ?? Heroicon::CreditCard)
-            ->url($url = Filament::getTenantBillingUrl())
-            ->visible(filament()->hasTenantBilling() && filled($url))
-            ->sort(-1);
-
-        if ($item instanceof MenuItem) {
-            return $item->toAction($action);
-        }
-
-        return $this->evaluate($item, [
-            'action' => $action,
-        ]) ?? $action;
-    }
-
-    protected function getTenantRegistrationMenuItem(Action | Closure | MenuItem | null $item = null): Action
-    {
-        $page = Filament::getTenantRegistrationPage();
-
-        $action = Action::make('register')
-            ->label($page ? $page::getLabel() : null)
-            ->icon(FilamentIcon::resolve(PanelsIconAlias::TENANT_MENU_REGISTRATION_BUTTON) ?? Heroicon::Plus)
-            ->url($url = Filament::getTenantRegistrationUrl())
-            ->visible(filament()->hasTenantRegistration() && filled($url) && (blank($page) || $page::canView(Filament::getTenant())))
-            ->sort(PHP_INT_MAX);
-
-        if ($item instanceof MenuItem) {
-            return $item->toAction($action);
-        }
-
-        return $this->evaluate($item, [
-            'action' => $action,
-        ]) ?? $action;
-    }
-
-    public function isTenantMenuSearchable(): ?bool
-    {
-        return $this->evaluate($this->isTenantMenuSearchable);
-    }
-
     /**
-     * @return array<Action>
+     * @return array<MenuItem>
      */
     public function getTenantMenuItems(): array
     {
         return collect($this->tenantMenuItems)
-            ->mapWithKeys(function (Action | Closure | MenuItem $item, int | string $key): array {
-                if ($item instanceof Action) {
-                    return [$item->getName() => $item];
+            ->filter(function (MenuItem $item, string | int $key): bool {
+                if (in_array($key, ['billing', 'profile', 'register'])) {
+                    return true;
                 }
 
-                if ($key === 'profile') {
-                    return ['profile' => $this->getTenantProfileMenuItem($item)];
-                }
-
-                if ($key === 'billing') {
-                    return ['billing' => $this->getTenantBillingMenuItem($item)];
-                }
-
-                if ($key === 'register') {
-                    return ['register' => $this->getTenantRegistrationMenuItem($item)];
-                }
-
-                $action = $this->evaluate($item);
-
-                if ($action instanceof MenuItem) {
-                    $action = $action->toAction();
-                }
-
-                return [$action->getName() => $action];
+                return $item->isVisible();
             })
-            ->when(
-                fn (Collection $items): bool => ! $items->has('profile'),
-                fn (Collection $items): Collection => $items->put('profile', $this->getTenantProfileMenuItem()),
-            )
-            ->when(
-                fn (Collection $items): bool => ! $items->has('billing'),
-                fn (Collection $items): Collection => $items->put('billing', $this->getTenantBillingMenuItem()),
-            )
-            ->when(
-                fn (Collection $items): bool => ! $items->has('register'),
-                fn (Collection $items): Collection => $items->put('register', $this->getTenantRegistrationMenuItem()),
-            )
-            ->filter(fn (Action $item): bool => $item->isVisible())
-            ->sortBy(fn (Action $item): int => $item->getSort())
+            ->sort(fn (MenuItem $item): int => $item->getSort())
             ->all();
     }
 
@@ -396,10 +275,5 @@ trait HasTenancy
         return (string) str($this->getTenantModel())
             ->classBasename()
             ->camel();
-    }
-
-    public function getTenancyScopeName(): string
-    {
-        return "{$this->getId()}_tenancy";
     }
 }

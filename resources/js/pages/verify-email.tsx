@@ -1,0 +1,107 @@
+import { Head, Link } from '@inertiajs/react';
+
+export default function VerifyEmail({
+    email,
+    registrationId,
+}: {
+    email: string;
+    registrationId: number;
+}) {
+    return (
+        <>
+            <Head title="Verify Email - Oriki" />
+            <div className="flex min-h-screen flex-col bg-gradient-to-br from-amber-50 to-orange-100 dark:from-gray-900 dark:to-gray-800">
+                <nav className="border-b border-amber-200/50 bg-white/80 backdrop-blur-sm dark:border-gray-700 dark:bg-gray-900/80">
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div className="flex h-16 items-center justify-between">
+                            <Link href="/" className="flex items-center">
+                                <h2 className="text-xl font-bold text-amber-600 dark:text-amber-400">
+                                    Oriki
+                                </h2>
+                            </Link>
+                        </div>
+                    </div>
+                </nav>
+
+                <main className="flex flex-1 items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+                    <div className="w-full max-w-md">
+                        <div className="rounded-lg bg-white px-8 py-10 text-center shadow-xl dark:bg-gray-800">
+                            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/30">
+                                <svg
+                                    className="h-10 w-10 text-amber-600 dark:text-amber-400"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                    />
+                                </svg>
+                            </div>
+
+                            <h1 className="mb-4 text-3xl font-bold text-gray-900 dark:text-white">
+                                Verify Your Email
+                            </h1>
+
+                            <p className="mb-6 text-gray-600 dark:text-gray-300">
+                                We've sent a verification link to:
+                            </p>
+
+                            <p className="mb-8 break-all text-lg font-semibold text-amber-600 dark:text-amber-400">
+                                {email}
+                            </p>
+
+                            <div className="space-y-4 rounded-lg border border-amber-200 bg-amber-50 p-4 text-left dark:border-amber-800 dark:bg-amber-900/20">
+                                <p className="text-sm text-gray-700 dark:text-gray-300">
+                                    Please check your email and click the verification link to continue
+                                    with your registration.
+                                </p>
+                                <p className="text-sm text-gray-600 dark:text-gray-400">
+                                    The verification link will expire in 60 minutes.
+                                </p>
+                            </div>
+
+                            <div className="mt-8 space-y-3">
+                                <p className="text-sm text-gray-600 dark:text-gray-400">
+                                    Didn't receive the email? Check your spam folder.
+                                </p>
+                                <Link
+                                    href="/"
+                                    className="text-sm font-medium text-amber-600 hover:text-amber-700 dark:text-amber-400 dark:hover:text-amber-300"
+                                >
+                                    ← Back to Home
+                                </Link>
+                            </div>
+                        </div>
+
+                        <div className="mt-6 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-900/20">
+                            <div className="flex items-start">
+                                <svg
+                                    className="mr-3 h-5 w-5 flex-shrink-0 text-blue-600 dark:text-blue-400"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                        clipRule="evenodd"
+                                    />
+                                </svg>
+                                <div className="text-sm text-blue-700 dark:text-blue-300">
+                                    <p className="font-medium">Important</p>
+                                    <p className="mt-1">
+                                        You must verify your email before you can access the registration
+                                        form. Once verified, you'll be redirected automatically.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </>
+    );
+}

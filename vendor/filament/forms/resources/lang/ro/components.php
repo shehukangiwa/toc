@@ -231,7 +231,7 @@ return [
 
     'markdown_editor' => [
 
-        'tools' => [
+        'toolbar_buttons' => [
             'attach_files' => 'Atașare fișiere',
             'blockquote' => 'Citat',
             'bold' => 'Îngroșat',
@@ -329,7 +329,7 @@ return [
 
         ],
 
-        'tools' => [
+        'toolbar_buttons' => [
             'attach_files' => 'Atașare fișiere',
             'blockquote' => 'Citat',
             'bold' => 'Îngroșat',
@@ -439,6 +439,22 @@ return [
         'boolean' => [
             'true' => 'Da',
             'false' => 'Nu',
+        ],
+
+    ],
+
+    'wizard' => [
+
+        'actions' => [
+
+            'previous_step' => [
+                'label' => 'Pasul anterior',
+            ],
+
+            'next_step' => [
+                'label' => 'Pasul următor',
+            ],
+
         ],
 
     ],

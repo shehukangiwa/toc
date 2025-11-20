@@ -75,7 +75,7 @@ class Cluster extends Page
             ->beforeLast('Cluster')
             ->kebab()
             ->replace('-', ' ')
-            ->ucwords();
+            ->title();
     }
 
     public static function getClusterBreadcrumb(): ?string
@@ -84,22 +84,22 @@ class Cluster extends Page
             ->beforeLast('Cluster')
             ->kebab()
             ->replace('-', ' ')
-            ->ucwords();
+            ->title();
     }
 
-    public static function prependClusterSlug(Panel $panel, string $slug): string
+    public static function prependClusterSlug(string $slug): string
     {
-        return static::getSlug($panel) . "/{$slug}";
+        return static::getSlug() . "/{$slug}";
     }
 
-    public static function prependClusterRouteBaseName(Panel $panel, string $name): string
+    public static function prependClusterRouteBaseName(string $name): string
     {
-        return (string) str(static::getSlug($panel))
+        return (string) str(static::getSlug())
             ->replace('/', '.')
             ->append(".{$name}");
     }
 
-    public static function getSlug(?Panel $panel = null): string
+    public static function getSlug(): string
     {
         if (filled(static::$slug)) {
             return static::$slug;
@@ -111,11 +111,11 @@ class Cluster extends Page
             ->slug();
     }
 
-    public static function getRouteName(?Panel $panel = null): string
+    public static function getRouteName(?string $panel = null): string
     {
-        $panel ??= Filament::getCurrentOrDefaultPanel();
+        $panel = $panel ? Filament::getPanel($panel) : Filament::getCurrentPanel();
 
-        return $panel->generateRouteName(static::getRelativeRouteName($panel));
+        return $panel->generateRouteName(static::getRelativeRouteName());
     }
 
     public static function getNavigationItemActiveRoutePattern(): string

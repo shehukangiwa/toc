@@ -4,15 +4,9 @@ namespace Filament\Tables\Filters;
 
 use Closure;
 use Filament\Forms\Components\Select;
-use Filament\Support\Services\RelationshipJoiner;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Znck\Eloquent\Relations\BelongsToThrough;
-
-use function Filament\Support\generate_search_term_expression;
 
 class SelectFilter extends BaseFilter
 {
@@ -51,7 +45,7 @@ class SelectFilter extends BaseFilter
                 __('filament-tables::table.filters.select.placeholder'),
         );
 
-        $this->indicateUsing(static function (SelectFilter $filter, array $state): array {
+        $this->indicateUsing(function (SelectFilter $filter, array $state): array {
             if ($filter->isMultiple()) {
                 if (blank($state['values'] ?? null)) {
                     return [];
@@ -60,30 +54,18 @@ class SelectFilter extends BaseFilter
                 if ($filter->queriesRelationships()) {
                     $relationshipQuery = $filter->getRelationshipQuery();
 
-                    $labels = [];
-
-                    if (
-                        $filter->hasEmptyRelationshipOption() &&
-                        in_array('__empty', $state['values'])
-                    ) {
-                        $labels[] = $filter->getEmptyRelationshipOptionLabel();
-                    }
-
-                    $labels = [
-                        ...$labels,
-                        ...$relationshipQuery
-                            ->when(
-                                $filter->getRelationship() instanceof BelongsToThrough,
-                                fn (Builder $query) => $query->distinct(),
-                            )
-                            ->when(
-                                $filter->getRelationshipKey(),
-                                fn (Builder $query, string $relationshipKey) => $query->whereIn($relationshipKey, $state['values']),
-                                fn (Builder $query) => $query->whereKey($state['values'])
-                            )
-                            ->pluck($relationshipQuery->qualifyColumn($filter->getRelationshipTitleAttribute()))
-                            ->all(),
-                    ];
+                    $labels = $relationshipQuery
+                        ->when(
+                            $filter->getRelationship() instanceof BelongsToThrough,
+                            fn (Builder $query) => $query->distinct(),
+                        )
+                        ->when(
+                            $this->getRelationshipKey(),
+                            fn (Builder $query, string $relationshipKey) => $query->whereIn($relationshipKey, $state['values']),
+                            fn (Builder $query) => $query->whereKey($state['values'])
+                        )
+                        ->pluck($relationshipQuery->qualifyColumn($filter->getRelationshipTitleAttribute()))
+                        ->all();
                 } else {
                     $labels = collect($filter->getOptions())
                         ->mapWithKeys(fn (string | array $label, string $value): array => is_array($label) ? $label : [$value => $label])
@@ -111,21 +93,14 @@ class SelectFilter extends BaseFilter
             }
 
             if ($filter->queriesRelationships()) {
-                if (
-                    $filter->hasEmptyRelationshipOption() &&
-                    ($state['value'] === '__empty')
-                ) {
-                    $label = $filter->getEmptyRelationshipOptionLabel();
-                } else {
-                    $label = $filter->getRelationshipQuery()
-                        ->when(
-                            $filter->getRelationshipKey(),
-                            fn (Builder $query, string $relationshipKey) => $query->where($relationshipKey, $state['value']),
-                            fn (Builder $query) => $query->whereKey($state['value'])
-                        )
-                        ->first()
-                        ?->getAttributeValue($filter->getRelationshipTitleAttribute());
-                }
+                $label = $filter->getRelationshipQuery()
+                    ->when(
+                        $this->getRelationshipKey(),
+                        fn (Builder $query, string $relationshipKey) => $query->where($relationshipKey, $state['value']),
+                        fn (Builder $query) => $query->whereKey($state['value'])
+                    )
+                    ->first()
+                    ?->getAttributeValue($filter->getRelationshipTitleAttribute());
             } else {
                 $label = collect($filter->getOptions())
                     ->mapWithKeys(fn (string | array $label, string $value): array => is_array($label) ? $label : [$value => $label])
@@ -156,11 +131,7 @@ class SelectFilter extends BaseFilter
     }
 
     /**
-     * @template TModel of Model
-     *
-     * @param  Builder<TModel>  $query
      * @param  array<string, mixed>  $data
-     * @return Builder<TModel>
      */
     public function apply(Builder $query, array $data = []): Builder
     {
@@ -180,19 +151,19 @@ class SelectFilter extends BaseFilter
 
         if (blank(Arr::first(
             Arr::wrap($values),
-            fn ($value): bool => filled($value),
+            fn ($value) => filled($value),
         ))) {
             return $query;
         }
 
         if (! $this->queriesRelationships()) {
             return $query->{$isMultiple ? 'whereIn' : 'where'}(
-                $query->qualifyColumn($this->getAttribute()),
+                $this->getAttribute(),
                 $values,
             );
         }
 
-        $applyRelationshipScope = fn (Builder $query) => $query->whereHas(
+        return $query->whereHas(
             $this->getRelationshipName(),
             function (Builder $query) use ($isMultiple, $values) {
                 if ($this->modifyRelationshipQueryUsing) {
@@ -211,19 +182,6 @@ class SelectFilter extends BaseFilter
                 return $query->whereKey($values);
             },
         );
-
-        if (
-            $this->hasEmptyRelationshipOption() &&
-            in_array('__empty', Arr::wrap($values))
-        ) {
-            $query->where(fn (Builder $query) => $query
-                ->where(fn (Builder $query) => $applyRelationshipScope($query))
-                ->orWhereDoesntHave($this->getRelationshipName()));
-        } else {
-            $applyRelationshipScope($query);
-        }
-
-        return $query;
     }
 
     public function attribute(string | Closure | null $name): static
@@ -318,219 +276,9 @@ class SelectFilter extends BaseFilter
                     $this->getRelationshipTitleAttribute(),
                     $this->modifyRelationshipQueryUsing,
                 )
-                ->getSearchResultsUsing(function (Select $component, ?string $search): array {
-                    $relationship = Relation::noConstraints(fn () => $component->getRelationship());
-
-                    $relationshipQuery = app(RelationshipJoiner::class)->prepareQueryForNoConstraints($relationship);
-
-                    if ($this->modifyRelationshipQueryUsing) {
-                        $relationshipQuery = $component->evaluate($this->modifyRelationshipQueryUsing, [
-                            'query' => $relationshipQuery,
-                            'search' => $search,
-                        ]) ?? $relationshipQuery;
-                    }
-
-                    $component->applySearchConstraint(
-                        $relationshipQuery,
-                        generate_search_term_expression($search, $component->isSearchForcedCaseInsensitive(), $relationshipQuery->getConnection()),
-                    );
-
-                    $baseRelationshipQuery = $relationshipQuery->getQuery();
-
-                    if (isset($baseRelationshipQuery->limit)) {
-                        $component->optionsLimit($baseRelationshipQuery->limit);
-                        $this->optionsLimit($baseRelationshipQuery->limit);
-                    } else {
-                        $relationshipQuery->limit($component->getOptionsLimit());
-                    }
-
-                    $options = [];
-
-                    if (
-                        $this->hasEmptyRelationshipOption() &&
-                        str($this->getEmptyRelationshipOptionLabel())->lower()->contains(Str::lower($search))
-                    ) {
-                        $options['__empty'] = $this->getEmptyRelationshipOptionLabel();
-                    }
-
-                    $qualifiedRelatedKeyName = $component->getQualifiedRelatedKeyNameForRelationship($relationship);
-
-                    if ($component->hasOptionLabelFromRecordUsingCallback()) {
-                        return $options + $relationshipQuery
-                            ->get()
-                            ->mapWithKeys(static fn (Model $record) => [
-                                $record->{Str::afterLast($qualifiedRelatedKeyName, '.')} => $component->getOptionLabelFromRecord($record),
-                            ])
-                            ->toArray();
-                    }
-
-                    $relationshipTitleAttribute = $component->getRelationshipTitleAttribute();
-
-                    if (empty($relationshipQuery->getQuery()->orders)) {
-                        $relationshipOrderByAttribute = $relationshipTitleAttribute;
-
-                        if (str_contains($relationshipOrderByAttribute, ' as ')) {
-                            $relationshipOrderByAttribute = (string) str($relationshipOrderByAttribute)->before(' as ');
-                        }
-
-                        $relationshipQuery->orderBy($relationshipQuery->qualifyColumn($relationshipOrderByAttribute));
-                    }
-
-                    if (str_contains($relationshipTitleAttribute, '->')) {
-                        if (! str_contains($relationshipTitleAttribute, ' as ')) {
-                            $relationshipTitleAttribute .= " as {$relationshipTitleAttribute}";
-                        }
-                    } else {
-                        $relationshipTitleAttribute = $relationshipQuery->qualifyColumn($relationshipTitleAttribute);
-                    }
-
-                    return $options + $relationshipQuery
-                        ->pluck($relationshipTitleAttribute, $qualifiedRelatedKeyName)
-                        ->toArray();
-                })
-                ->options(function (Select $component): ?array {
-                    if (($component->isSearchable()) && ! $component->isPreloaded()) {
-                        return null;
-                    }
-
-                    $relationship = Relation::noConstraints(fn () => $component->getRelationship());
-
-                    $relationshipQuery = app(RelationshipJoiner::class)->prepareQueryForNoConstraints($relationship);
-
-                    if ($this->modifyRelationshipQueryUsing) {
-                        $relationshipQuery = $component->evaluate($this->modifyRelationshipQueryUsing, [
-                            'query' => $relationshipQuery,
-                            'search' => null,
-                        ]) ?? $relationshipQuery;
-                    }
-
-                    $baseRelationshipQuery = $relationshipQuery->getQuery();
-
-                    if (isset($baseRelationshipQuery->limit)) {
-                        $component->optionsLimit($baseRelationshipQuery->limit);
-                        $this->optionsLimit($baseRelationshipQuery->limit);
-                    } elseif ($component->isSearchable() && filled($component->getSearchColumns())) {
-                        $relationshipQuery->limit($component->getOptionsLimit());
-                    }
-
-                    $options = [];
-
-                    if ($this->hasEmptyRelationshipOption()) {
-                        $options['__empty'] = $this->getEmptyRelationshipOptionLabel();
-                    }
-
-                    $qualifiedRelatedKeyName = $component->getQualifiedRelatedKeyNameForRelationship($relationship);
-
-                    if ($component->hasOptionLabelFromRecordUsingCallback()) {
-                        return $options + $relationshipQuery
-                            ->get()
-                            ->mapWithKeys(static fn (Model $record) => [
-                                $record->{Str::afterLast($qualifiedRelatedKeyName, '.')} => $component->getOptionLabelFromRecord($record),
-                            ])
-                            ->toArray();
-                    }
-
-                    $relationshipTitleAttribute = $component->getRelationshipTitleAttribute();
-
-                    if (empty($relationshipQuery->getQuery()->orders)) {
-                        $relationshipOrderByAttribute = $relationshipTitleAttribute;
-
-                        if (str_contains($relationshipOrderByAttribute, ' as ')) {
-                            $relationshipOrderByAttribute = (string) str($relationshipOrderByAttribute)->before(' as ');
-                        }
-
-                        $relationshipQuery->orderBy($relationshipQuery->qualifyColumn($relationshipOrderByAttribute));
-                    }
-
-                    if (str_contains($relationshipTitleAttribute, '->')) {
-                        if (! str_contains($relationshipTitleAttribute, ' as ')) {
-                            $relationshipTitleAttribute .= " as {$relationshipTitleAttribute}";
-                        }
-                    } else {
-                        $relationshipTitleAttribute = $relationshipQuery->qualifyColumn($relationshipTitleAttribute);
-                    }
-
-                    return $options + $relationshipQuery
-                        ->pluck($relationshipTitleAttribute, $qualifiedRelatedKeyName)
-                        ->toArray();
-                })
-                ->getOptionLabelUsing(function (Select $component) {
-                    if (
-                        $this->hasEmptyRelationshipOption() &&
-                        ($component->getState() === '__empty')
-                    ) {
-                        return $this->getEmptyRelationshipOptionLabel();
-                    }
-
-                    $record = $component->getSelectedRecord();
-
-                    if (! $record) {
-                        return null;
-                    }
-
-                    if ($component->hasOptionLabelFromRecordUsingCallback()) {
-                        return $component->getOptionLabelFromRecord($record);
-                    }
-
-                    $relationshipTitleAttribute = $component->getRelationshipTitleAttribute();
-
-                    if (str_contains($relationshipTitleAttribute, '->')) {
-                        $relationshipTitleAttribute = str_replace('->', '.', $relationshipTitleAttribute);
-                    }
-
-                    return data_get($record, $relationshipTitleAttribute);
-                })
-                ->getOptionLabelsUsing(function (Select $component, array $values): array {
-                    $relationship = Relation::noConstraints(fn () => $component->getRelationship());
-
-                    $relationshipQuery = app(RelationshipJoiner::class)->prepareQueryForNoConstraints($relationship);
-
-                    $qualifiedRelatedKeyName = $component->getQualifiedRelatedKeyNameForRelationship($relationship);
-
-                    $relationshipQuery->whereIn($qualifiedRelatedKeyName, $values);
-
-                    if ($this->modifyRelationshipQueryUsing) {
-                        $relationshipQuery = $component->evaluate($this->modifyRelationshipQueryUsing, [
-                            'query' => $relationshipQuery,
-                            'search' => null,
-                        ]) ?? $relationshipQuery;
-                    }
-
-                    $labels = [];
-
-                    if (
-                        $this->hasEmptyRelationshipOption() &&
-                        in_array('__empty', $values)
-                    ) {
-                        $labels['__empty'] = $this->getEmptyRelationshipOptionLabel();
-                    }
-
-                    if ($component->hasOptionLabelFromRecordUsingCallback()) {
-                        return $labels + $relationshipQuery
-                            ->get()
-                            ->mapWithKeys(static fn (Model $record) => [
-                                $record->{Str::afterLast($qualifiedRelatedKeyName, '.')} => $component->getOptionLabelFromRecord($record),
-                            ])
-                            ->toArray();
-                    }
-
-                    $relationshipTitleAttribute = $component->getRelationshipTitleAttribute();
-
-                    if (str_contains($relationshipTitleAttribute, '->')) {
-                        if (! str_contains($relationshipTitleAttribute, ' as ')) {
-                            $relationshipTitleAttribute .= " as {$relationshipTitleAttribute}";
-                        }
-                    } else {
-                        $relationshipTitleAttribute = $relationshipQuery->qualifyColumn($relationshipTitleAttribute);
-                    }
-
-                    return $labels + $relationshipQuery
-                        ->pluck($relationshipTitleAttribute, $qualifiedRelatedKeyName)
-                        ->toArray();
-                })
                 ->forceSearchCaseInsensitive($this->isSearchForcedCaseInsensitive());
         } else {
-            $field->options(fn (): array => $this->getOptions());
+            $field->options($this->getOptions());
         }
 
         if ($this->getOptionLabelUsing) {

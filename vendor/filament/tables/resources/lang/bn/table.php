@@ -37,7 +37,7 @@ return [
             'label' => 'কার্যক্রম গুলো দেখুন',
         ],
 
-        'column_manager' => [
+        'toggle_columns' => [
             'label' => 'কলাম টগল করুন',
         ],
 
@@ -94,7 +94,7 @@ return [
 
     'selection_indicator' => [
 
-        'selected_count' => '১টি রেকর্ড নির্বাচিত | :countটি রেকর্ড নির্বাচিত',
+        'selected_count' => '১ টি রেকর্ড নির্বাচিত। | :count টি রেকর্ড নির্বাচিত।',
 
         'actions' => [
 

@@ -4,6 +4,7 @@ namespace Filament\Tables\Concerns;
 
 use Closure;
 use Filament\Support\Services\RelationshipJoiner;
+use Illuminate\Database\Connection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Str;
@@ -11,14 +12,14 @@ use stdClass;
 
 trait CanSummarizeRecords
 {
-    public function getAllTableSummaryQuery(): ?Builder
+    public function getAllTableSummaryQuery(): Builder
     {
         return $this->getFilteredTableQuery();
     }
 
-    public function getPageTableSummaryQuery(): ?Builder
+    public function getPageTableSummaryQuery(): Builder
     {
-        return $this->getFilteredSortedTableQuery()?->forPage(
+        return $this->getFilteredSortedTableQuery()->forPage(
             page: $this->getTableRecords()->currentPage(),
             perPage: $this->getTableRecords()->perPage(),
         );
@@ -27,12 +28,8 @@ trait CanSummarizeRecords
     /**
      * @return array<string, mixed>
      */
-    public function getTableSummarySelectedState(?Builder $query = null, ?Closure $modifyQueryUsing = null): array
+    public function getTableSummarySelectedState(Builder $query, ?Closure $modifyQueryUsing = null): array
     {
-        if (! $query) {
-            return [];
-        }
-
         $selects = [];
 
         foreach ($this->getTable()->getVisibleColumns() as $column) {
@@ -42,11 +39,14 @@ trait CanSummarizeRecords
                 continue;
             }
 
-            if ($column->hasRelationship($query->getModel())) {
+            if (filled($column->getRelationshipName())) {
                 continue;
             }
 
-            $qualifiedAttribute = $query->getModel()->qualifyColumn($column->getName());
+            /** @var Connection $queryConnection */
+            $queryConnection = $query->getConnection();
+
+            $qualifiedAttribute = $queryConnection->getTablePrefix() . $query->getModel()->qualifyColumn($column->getName());
 
             foreach ($summarizers as $summarizer) {
                 if ($summarizer->hasQueryModification()) {

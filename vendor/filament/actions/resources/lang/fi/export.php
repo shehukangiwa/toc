@@ -12,7 +12,7 @@ return [
 
             'columns' => [
 
-                'label' => 'Sarakkeet',
+                'label' => 'Kolumnit',
 
                 'form' => [
 

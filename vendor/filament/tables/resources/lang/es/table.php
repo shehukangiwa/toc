@@ -2,21 +2,9 @@
 
 return [
 
-    'column_manager' => [
+    'column_toggle' => [
 
         'heading' => 'Columnas',
-
-        'actions' => [
-
-            'apply' => [
-                'label' => 'Aplicar columnas',
-            ],
-
-            'reset' => [
-                'label' => 'Resetear las columnas',
-            ],
-
-        ],
 
     ],
 
@@ -24,20 +12,6 @@ return [
 
         'actions' => [
             'label' => 'Acción|Acciones',
-        ],
-
-        'select' => [
-
-            'loading_message' => 'Cargando...',
-
-            'no_search_results_message' => 'No hay opciones que coincidan con su búsqueda.',
-
-            'placeholder' => 'Seleccione una opción',
-
-            'searching_message' => 'Buscando...',
-
-            'search_prompt' => 'Empiece a escribir para buscar...',
-
         ],
 
         'text' => [
@@ -125,7 +99,7 @@ return [
             'label' => 'Abrir acciones',
         ],
 
-        'column_manager' => [
+        'toggle_columns' => [
             'label' => 'Alternar columnas',
         ],
 
@@ -171,13 +145,7 @@ return [
         ],
 
         'select' => [
-
             'placeholder' => 'Todos',
-
-            'relationship' => [
-                'empty_option_label' => 'Ninguno',
-            ],
-
         ],
 
         'trashed' => [
@@ -200,6 +168,7 @@ return [
 
             'group' => [
                 'label' => 'Agrupar por',
+                'placeholder' => 'Agrupar por',
             ],
 
             'direction' => [
@@ -259,7 +228,5 @@ return [
         ],
 
     ],
-
-    'default_model_label' => 'registro',
 
 ];

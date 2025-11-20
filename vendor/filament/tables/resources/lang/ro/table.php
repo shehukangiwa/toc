@@ -2,7 +2,7 @@
 
 return [
 
-    'column_manager' => [
+    'column_toggle' => [
 
         'heading' => 'Coloane',
 
@@ -88,7 +88,7 @@ return [
             'label' => 'Operațiuni in masă',
         ],
 
-        'column_manager' => [
+        'toggle_columns' => [
             'label' => 'Deschide/închide coloane',
         ],
 

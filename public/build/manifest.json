@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-Zk8HkFKT.css",
+    "file": "assets/app-BF1AQ3Vn.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "names": [
@@ -8,19 +8,58 @@
     ]
   },
   "resources/js/app.tsx": {
-    "file": "assets/app-CN_FeQP-.js",
+    "file": "assets/app-fs8Z3bp1.js",
     "name": "app",
     "src": "resources/js/app.tsx",
     "isEntry": true,
     "dynamicImports": [
+      "resources/js/pages/register.tsx",
+      "resources/js/pages/registration-complete.tsx",
+      "resources/js/pages/verify-email.tsx",
       "resources/js/pages/welcome.tsx"
     ],
     "css": [
-      "assets/app-Zk8HkFKT.css"
+      "assets/app-BF1AQ3Vn.css"
+    ]
+  },
+  "resources/js/pages/register.tsx": {
+    "file": "assets/register-DDcR6RTx.js",
+    "name": "register",
+    "src": "resources/js/pages/register.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx"
+    ],
+    "css": [
+      "assets/app-BF1AQ3Vn.css"
+    ]
+  },
+  "resources/js/pages/registration-complete.tsx": {
+    "file": "assets/registration-complete-Dp2UAMaN.js",
+    "name": "registration-complete",
+    "src": "resources/js/pages/registration-complete.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx"
+    ],
+    "css": [
+      "assets/app-BF1AQ3Vn.css"
+    ]
+  },
+  "resources/js/pages/verify-email.tsx": {
+    "file": "assets/verify-email-0ojpu4Ct.js",
+    "name": "verify-email",
+    "src": "resources/js/pages/verify-email.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx"
+    ],
+    "css": [
+      "assets/app-BF1AQ3Vn.css"
     ]
   },
   "resources/js/pages/welcome.tsx": {
-    "file": "assets/welcome-qroIfsbs.js",
+    "file": "assets/welcome-BCch4h_3.js",
     "name": "welcome",
     "src": "resources/js/pages/welcome.tsx",
     "isDynamicEntry": true,
@@ -28,7 +67,7 @@
       "resources/js/app.tsx"
     ],
     "css": [
-      "assets/app-Zk8HkFKT.css"
+      "assets/app-BF1AQ3Vn.css"
     ]
   }
 }

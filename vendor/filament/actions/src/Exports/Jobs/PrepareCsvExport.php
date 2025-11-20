@@ -52,7 +52,7 @@ class PrepareCsvExport implements ShouldQueue
 
     public function handle(): void
     {
-        $csv = Writer::from(new SplTempFileObject);
+        $csv = Writer::createFromFileObject(new SplTempFileObject);
         $csv->setOutputBOM(Bom::Utf8);
         $csv->setDelimiter($this->exporter::getCsvDelimiter());
         $csv->insertOne(array_values($this->columnMap));
@@ -133,7 +133,7 @@ class PrepareCsvExport implements ShouldQueue
         // in case it contains attributes that are not serializable, such as binary columns.
         $this->export->unsetRelation('user');
 
-        $dispatchRecords = function (array $records) use ($exportCsvJob, &$page, &$totalRows): void {
+        $dispatchRecords = function (array $records) use ($exportCsvJob, &$page, &$totalRows) {
             $recordsCount = count($records);
 
             if (($totalRows + $recordsCount) > $this->export->total_rows) {

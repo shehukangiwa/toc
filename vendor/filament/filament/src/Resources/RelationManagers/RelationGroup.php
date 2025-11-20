@@ -3,31 +3,23 @@
 namespace Filament\Resources\RelationManagers;
 
 use Closure;
-use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Support\Components\Component;
-use Filament\Support\Concerns\HasBadgeTooltip;
 use Filament\Support\Concerns\HasIcon;
-use Filament\Support\Concerns\HasIconPosition;
 use Illuminate\Database\Eloquent\Model;
 
 class RelationGroup extends Component
 {
-    use HasBadgeTooltip;
     use HasIcon;
-    use HasIconPosition;
 
     protected string | Closure | null $badge = null;
 
-    /**
-     * @var string | array<string> | Closure | null
-     */
-    protected string | array | Closure | null $badgeColor = null;
+    protected string | Closure | null $badgeColor = null;
+
+    protected string | Closure | null $badgeTooltip = null;
 
     protected ?Model $ownerRecord = null;
 
     protected ?string $pageClass = null;
-
-    protected ?Closure $modifyTabUsing = null;
 
     /**
      * @param  array<class-string<RelationManager> | RelationManagerConfiguration>  $managers
@@ -69,12 +61,16 @@ class RelationGroup extends Component
         return $this;
     }
 
-    /**
-     * @param  string | array<string> | Closure | null  $color
-     */
-    public function badgeColor(string | array | Closure | null $color): static
+    public function badgeColor(string | Closure | null $color): static
     {
         $this->badgeColor = $color;
+
+        return $this;
+    }
+
+    public function badgeTooltip(string | Closure | null $tooltip): static
+    {
+        $this->badgeTooltip = $tooltip;
 
         return $this;
     }
@@ -82,13 +78,6 @@ class RelationGroup extends Component
     public function getLabel(): string
     {
         return $this->evaluate($this->label);
-    }
-
-    public function tab(?Closure $callback): static
-    {
-        $this->modifyTabUsing = $callback;
-
-        return $this;
     }
 
     /**
@@ -127,12 +116,14 @@ class RelationGroup extends Component
         return $this->evaluate($this->badge);
     }
 
-    /**
-     * @return string | array<string> | null
-     */
-    public function getBadgeColor(): string | array | null
+    public function getBadgeColor(): ?string
     {
         return $this->evaluate($this->badgeColor);
+    }
+
+    public function getBadgeTooltip(): ?string
+    {
+        return $this->evaluate($this->badgeTooltip);
     }
 
     public function getOwnerRecord(): ?Model
@@ -172,19 +163,5 @@ class RelationGroup extends Component
             Model::class, $ownerRecord::class => [$ownerRecord],
             default => parent::resolveDefaultClosureDependencyForEvaluationByType($parameterType),
         };
-    }
-
-    public function getTabComponent(): Tab
-    {
-        $tab = Tab::make($this->getLabel())
-            ->badge($this->getBadge())
-            ->badgeColor($this->getBadgeColor())
-            ->badgeTooltip($this->getBadgeTooltip())
-            ->icon($this->getIcon())
-            ->iconPosition($this->getIconPosition());
-
-        return $this->evaluate($this->modifyTabUsing, [
-            'tab' => $tab,
-        ]) ?? $tab;
     }
 }

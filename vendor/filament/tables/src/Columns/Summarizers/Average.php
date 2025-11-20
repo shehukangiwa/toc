@@ -26,8 +26,6 @@ class Average extends Summarizer
      */
     public function getSelectStatements(string $column): array
     {
-        $column = $this->getQuery()->getGrammar()->wrap($column);
-
         return [
             $this->getSelectAlias() => "avg({$column})",
         ];

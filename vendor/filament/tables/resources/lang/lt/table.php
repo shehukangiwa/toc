@@ -2,7 +2,7 @@
 
 return [
 
-    'column_manager' => [
+    'column_toggle' => [
 
         'heading' => 'Stulpeliai',
 
@@ -94,7 +94,7 @@ return [
             'label' => 'Atidaryti veiksmus',
         ],
 
-        'column_manager' => [
+        'toggle_columns' => [
             'label' => 'Perjungti stulpelius',
         ],
 
