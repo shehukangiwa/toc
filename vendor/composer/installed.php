@@ -3,7 +3,7 @@
         'name' => 'laravel/blank-react-starter-kit',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '8a7f291b59e603614cd8b8313e21691a1285dadd',
+        'reference' => '08c469222361fdf77391fa9d77b599a25afb881c',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -565,7 +565,7 @@
         'laravel/blank-react-starter-kit' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '8a7f291b59e603614cd8b8313e21691a1285dadd',
+            'reference' => '08c469222361fdf77391fa9d77b599a25afb881c',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
