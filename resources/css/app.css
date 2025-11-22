@@ -7,6 +7,20 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 
+    /* Nigerian Cultural Color Palette */
+    /* Primary: Orange (#E65C2E) - Energy, warmth, celebration */
+    /* Secondary: Teal (#2D9B9B) - Prosperity, harmony */
+    /* Tertiary: Rich Green (#1B5E20) - Growth, heritage, the Nigerian flag */
+    /* Accent: Deep Red (#C62828) - Royalty, prestige, passion */
+    /* Supporting: Gold (#D4AF37) - Wealth, excellence */
+
+    --color-nigerian-orange: #E65C2E;
+    --color-nigerian-teal: #2D9B9B;
+    --color-nigerian-green: #1B5E20;
+    --color-nigerian-red: #C62828;
+    --color-nigerian-gold: #D4AF37;
+    --color-nigerian-white: #FFFFFF;
+
     /* Custom animations */
     @keyframes float {
         0%, 100% {
@@ -38,11 +52,11 @@
     @keyframes pulse-glow {
         0%, 100% {
             opacity: 1;
-            box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+            box-shadow: 0 0 20px rgba(230, 92, 46, 0.5);
         }
         50% {
             opacity: 0.8;
-            box-shadow: 0 0 40px rgba(251, 191, 36, 0.8);
+            box-shadow: 0 0 40px rgba(230, 92, 46, 0.8);
         }
     }
 
@@ -54,6 +68,26 @@
         to {
             opacity: 1;
             transform: translateY(0);
+        }
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes scale-in {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
         }
     }
 }
@@ -96,21 +130,37 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Gradient text - Nigerian theme */
+/* Nigerian Cultural Gradient - Authentic brand colors */
 .gradient-text {
-    background: linear-gradient(135deg, #059669 0%, #fbbf24 50%, #10b981 100%);
+    background: linear-gradient(135deg, #E65C2E 0%, #D4AF37 30%, #2D9B9B 60%, #C62828 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-/* Image placeholder styling - Nigerian theme */
+/* Warm gradient overlay for sections - Nigerian warmth */
+.gradient-warm {
+    background: linear-gradient(135deg, rgba(230, 92, 46, 0.15) 0%, rgba(198, 40, 40, 0.15) 100%);
+}
+
+/* Cool gradient overlay - Teal accent */
+.gradient-cool {
+    background: linear-gradient(135deg, rgba(45, 155, 155, 0.15) 0%, rgba(27, 94, 32, 0.15) 100%);
+}
+
+/* Royal gradient - Prestige feel */
+.gradient-royal {
+    background: linear-gradient(135deg, rgba(198, 40, 40, 0.2) 0%, rgba(212, 175, 55, 0.2) 50%, rgba(230, 92, 46, 0.2) 100%);
+}
+
+/* Image placeholder styling - Nigerian cultural theme */
 .image-placeholder {
     background: linear-gradient(
         135deg,
-        rgba(5, 150, 105, 0.1) 0%,
-        rgba(251, 191, 36, 0.1) 50%,
-        rgba(16, 185, 129, 0.1) 100%
+        rgba(230, 92, 46, 0.1) 0%,
+        rgba(212, 175, 55, 0.15) 30%,
+        rgba(45, 155, 155, 0.1) 60%,
+        rgba(198, 40, 40, 0.1) 100%
     );
     position: relative;
     overflow: hidden;
@@ -130,4 +180,26 @@
         transparent
     );
     animation: shimmer 3s infinite;
+}
+
+/* Traditional border with cultural patterns */
+.cultural-border {
+    border-image: linear-gradient(90deg, #E65C2E, #D4AF37, #2D9B9B, #C62828) 1;
+}
+
+/* Glass effect with warm tint - Nigerian warmth */
+.glass-warm {
+    background: rgba(230, 92, 46, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(230, 92, 46, 0.2);
+}
+
+/* Utility classes for new animations */
+.animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
+}
+
+.animate-scale-in {
+    animation: scale-in 0.6s ease-out forwards;
 }
