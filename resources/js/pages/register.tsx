@@ -1,5 +1,6 @@
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
+import Layout from '@/components/Layout';
 
 interface Registration {
     id: number;
@@ -41,216 +42,291 @@ export default function Register({ registration }: { registration?: Registration
     return (
         <>
             <Head title="Register - Oriki" />
-            <div className="flex min-h-screen flex-col bg-gradient-to-br from-amber-50 to-orange-100 dark:from-gray-900 dark:to-gray-800">
-                <nav className="border-b border-amber-200/50 bg-white/80 backdrop-blur-sm dark:border-gray-700 dark:bg-gray-900/80">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <div className="flex h-16 items-center justify-between">
-                            <Link href="/" className="flex items-center">
-                                <h2 className="text-xl font-bold text-amber-600 dark:text-amber-400">
-                                    Oriki
-                                </h2>
-                            </Link>
-                        </div>
-                    </div>
-                </nav>
-
-                <main className="flex flex-1 items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-                    <div className="w-full max-w-2xl">
-                        <div className="rounded-lg bg-white px-8 py-10 shadow-xl dark:bg-gray-800">
-                            <div className="mb-8 text-center">
-                                <h1 className="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
-                                    Event Registration
-                                </h1>
-                                <p className="text-gray-600 dark:text-gray-300">
-                                    Register for Oriki: The Royal Dining Experience
-                                </p>
+            <Layout>
+                <div className="w-full px-4 py-12 sm:px-6 lg:px-8">
+                    <div className="mx-auto max-w-4xl">
+                        {/* Header */}
+                        <div className="mb-12 animate-slide-up text-center">
+                            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-green-600 via-yellow-500 to-emerald-600 shadow-2xl">
+                                <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
                             </div>
+                            <h1 className="mb-4 text-5xl font-bold text-white">
+                                Event Registration
+                            </h1>
+                            <p className="text-xl text-gray-300">
+                                {registration ? 'Complete your registration for Oriki' : 'Reserve your seat for the royal dining experience'}
+                            </p>
+                        </div>
 
-                            <form onSubmit={submit} className="space-y-6">
-                                <div className="grid gap-6 sm:grid-cols-3">
-                                    <div>
-                                        <label
-                                            htmlFor="first_name"
-                                            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                        >
-                                            First Name <span className="text-red-500">*</span>
-                                        </label>
-                                        <input
-                                            id="first_name"
-                                            type="text"
-                                            value={data.first_name}
-                                            onChange={(e) => setData('first_name', e.target.value)}
-                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-                                            required
-                                        />
-                                        {errors.first_name && (
-                                            <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                                                {errors.first_name}
-                                            </p>
-                                        )}
-                                    </div>
-
-                                    <div>
-                                        <label
-                                            htmlFor="second_name"
-                                            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                        >
-                                            Second Name <span className="text-red-500">*</span>
-                                        </label>
-                                        <input
-                                            id="second_name"
-                                            type="text"
-                                            value={data.second_name}
-                                            onChange={(e) => setData('second_name', e.target.value)}
-                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-                                            required
-                                        />
-                                        {errors.second_name && (
-                                            <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                                                {errors.second_name}
-                                            </p>
-                                        )}
-                                    </div>
-
-                                    <div>
-                                        <label
-                                            htmlFor="last_name"
-                                            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                        >
-                                            Last Name <span className="text-red-500">*</span>
-                                        </label>
-                                        <input
-                                            id="last_name"
-                                            type="text"
-                                            value={data.last_name}
-                                            onChange={(e) => setData('last_name', e.target.value)}
-                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-                                            required
-                                        />
-                                        {errors.last_name && (
-                                            <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                                                {errors.last_name}
-                                            </p>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <div className="grid gap-6 sm:grid-cols-2">
-                                    <div>
-                                        <label
-                                            htmlFor="email"
-                                            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                        >
-                                            Email Address <span className="text-red-500">*</span>
-                                        </label>
-                                        <input
-                                            id="email"
-                                            type="email"
-                                            value={data.email}
-                                            onChange={(e) => setData('email', e.target.value)}
-                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-                                            required
-                                            disabled={!!registration}
-                                        />
-                                        {errors.email && (
-                                            <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                                                {errors.email}
-                                            </p>
-                                        )}
-                                    </div>
-
-                                    <div>
-                                        <label
-                                            htmlFor="phone_number"
-                                            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                        >
-                                            Phone Number <span className="text-red-500">*</span>
-                                        </label>
-                                        <input
-                                            id="phone_number"
-                                            type="tel"
-                                            value={data.phone_number}
-                                            onChange={(e) => setData('phone_number', e.target.value)}
-                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-                                            required
-                                        />
-                                        {errors.phone_number && (
-                                            <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                                                {errors.phone_number}
-                                            </p>
-                                        )}
-                                    </div>
-                                </div>
-
+                        {/* Form Card */}
+                        <div className="animate-slide-up glass-dark rounded-3xl p-8 shadow-2xl sm:p-12" style={{ animationDelay: '0.1s' }}>
+                            <form onSubmit={submit} className="space-y-8">
+                                {/* Personal Information Section */}
                                 <div>
-                                    <label
-                                        htmlFor="address"
-                                        className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                    >
-                                        Address <span className="text-red-500">*</span>
-                                    </label>
-                                    <textarea
-                                        id="address"
-                                        value={data.address}
-                                        onChange={(e) => setData('address', e.target.value)}
-                                        rows={3}
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-                                        required
-                                    />
-                                    {errors.address && (
-                                        <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                                            {errors.address}
-                                        </p>
-                                    )}
+                                    <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold text-white">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-green-600 to-yellow-500">
+                                            <span className="text-lg font-bold">1</span>
+                                        </div>
+                                        Personal Information
+                                    </h2>
+
+                                    <div className="grid gap-6 sm:grid-cols-3">
+                                        <div>
+                                            <label
+                                                htmlFor="first_name"
+                                                className="block text-sm font-semibold text-gray-200"
+                                            >
+                                                First Name <span className="text-pink-400">*</span>
+                                            </label>
+                                            <input
+                                                id="first_name"
+                                                type="text"
+                                                value={data.first_name}
+                                                onChange={(e) => setData('first_name', e.target.value)}
+                                                className="mt-2 block w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-gray-400 backdrop-blur-sm transition-all focus:border-amber-500 focus:bg-white/10 focus:ring-2 focus:ring-amber-500/50"
+                                                placeholder="Enter first name"
+                                                required
+                                            />
+                                            {errors.first_name && (
+                                                <p className="mt-2 flex items-center gap-1 text-sm text-pink-400">
+                                                    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                                    </svg>
+                                                    {errors.first_name}
+                                                </p>
+                                            )}
+                                        </div>
+
+                                        <div>
+                                            <label
+                                                htmlFor="second_name"
+                                                className="block text-sm font-semibold text-gray-200"
+                                            >
+                                                Second Name <span className="text-pink-400">*</span>
+                                            </label>
+                                            <input
+                                                id="second_name"
+                                                type="text"
+                                                value={data.second_name}
+                                                onChange={(e) => setData('second_name', e.target.value)}
+                                                className="mt-2 block w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-gray-400 backdrop-blur-sm transition-all focus:border-amber-500 focus:bg-white/10 focus:ring-2 focus:ring-amber-500/50"
+                                                placeholder="Enter second name"
+                                                required
+                                            />
+                                            {errors.second_name && (
+                                                <p className="mt-2 flex items-center gap-1 text-sm text-pink-400">
+                                                    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                                    </svg>
+                                                    {errors.second_name}
+                                                </p>
+                                            )}
+                                        </div>
+
+                                        <div>
+                                            <label
+                                                htmlFor="last_name"
+                                                className="block text-sm font-semibold text-gray-200"
+                                            >
+                                                Last Name <span className="text-pink-400">*</span>
+                                            </label>
+                                            <input
+                                                id="last_name"
+                                                type="text"
+                                                value={data.last_name}
+                                                onChange={(e) => setData('last_name', e.target.value)}
+                                                className="mt-2 block w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-gray-400 backdrop-blur-sm transition-all focus:border-amber-500 focus:bg-white/10 focus:ring-2 focus:ring-amber-500/50"
+                                                placeholder="Enter last name"
+                                                required
+                                            />
+                                            {errors.last_name && (
+                                                <p className="mt-2 flex items-center gap-1 text-sm text-pink-400">
+                                                    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                                    </svg>
+                                                    {errors.last_name}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div className="grid gap-6 sm:grid-cols-2">
-                                    <div>
-                                        <label
-                                            htmlFor="organization"
-                                            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                        >
-                                            Organization (Optional)
-                                        </label>
-                                        <input
-                                            id="organization"
-                                            type="text"
-                                            value={data.organization}
-                                            onChange={(e) => setData('organization', e.target.value)}
-                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-                                        />
-                                        {errors.organization && (
-                                            <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                                                {errors.organization}
-                                            </p>
-                                        )}
-                                    </div>
+                                {/* Contact Information Section */}
+                                <div>
+                                    <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold text-white">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-500 to-green-600">
+                                            <span className="text-lg font-bold">2</span>
+                                        </div>
+                                        Contact Details
+                                    </h2>
 
-                                    <div>
-                                        <label
-                                            htmlFor="designation"
-                                            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                        >
-                                            Designation (Optional)
-                                        </label>
-                                        <input
-                                            id="designation"
-                                            type="text"
-                                            value={data.designation}
-                                            onChange={(e) => setData('designation', e.target.value)}
-                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-                                        />
-                                        {errors.designation && (
-                                            <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                                                {errors.designation}
-                                            </p>
-                                        )}
+                                    <div className="space-y-6">
+                                        <div className="grid gap-6 sm:grid-cols-2">
+                                            <div>
+                                                <label
+                                                    htmlFor="email"
+                                                    className="block text-sm font-semibold text-gray-200"
+                                                >
+                                                    Email Address <span className="text-pink-400">*</span>
+                                                </label>
+                                                <div className="relative mt-2">
+                                                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+                                                        <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                                        </svg>
+                                                    </div>
+                                                    <input
+                                                        id="email"
+                                                        type="email"
+                                                        value={data.email}
+                                                        onChange={(e) => setData('email', e.target.value)}
+                                                        className="block w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-400 backdrop-blur-sm transition-all focus:border-amber-500 focus:bg-white/10 focus:ring-2 focus:ring-amber-500/50 disabled:cursor-not-allowed disabled:opacity-50"
+                                                        placeholder="your@email.com"
+                                                        required
+                                                        disabled={!!registration}
+                                                    />
+                                                </div>
+                                                {errors.email && (
+                                                    <p className="mt-2 flex items-center gap-1 text-sm text-pink-400">
+                                                        <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                                        </svg>
+                                                        {errors.email}
+                                                    </p>
+                                                )}
+                                            </div>
+
+                                            <div>
+                                                <label
+                                                    htmlFor="phone_number"
+                                                    className="block text-sm font-semibold text-gray-200"
+                                                >
+                                                    Phone Number <span className="text-pink-400">*</span>
+                                                </label>
+                                                <div className="relative mt-2">
+                                                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+                                                        <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                                        </svg>
+                                                    </div>
+                                                    <input
+                                                        id="phone_number"
+                                                        type="tel"
+                                                        value={data.phone_number}
+                                                        onChange={(e) => setData('phone_number', e.target.value)}
+                                                        className="block w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-400 backdrop-blur-sm transition-all focus:border-amber-500 focus:bg-white/10 focus:ring-2 focus:ring-amber-500/50"
+                                                        placeholder="+1 (555) 000-0000"
+                                                        required
+                                                    />
+                                                </div>
+                                                {errors.phone_number && (
+                                                    <p className="mt-2 flex items-center gap-1 text-sm text-pink-400">
+                                                        <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                                        </svg>
+                                                        {errors.phone_number}
+                                                    </p>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label
+                                                htmlFor="address"
+                                                className="block text-sm font-semibold text-gray-200"
+                                            >
+                                                Address <span className="text-pink-400">*</span>
+                                            </label>
+                                            <textarea
+                                                id="address"
+                                                value={data.address}
+                                                onChange={(e) => setData('address', e.target.value)}
+                                                rows={3}
+                                                className="mt-2 block w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-gray-400 backdrop-blur-sm transition-all focus:border-amber-500 focus:bg-white/10 focus:ring-2 focus:ring-amber-500/50"
+                                                placeholder="Enter your full address"
+                                                required
+                                            />
+                                            {errors.address && (
+                                                <p className="mt-2 flex items-center gap-1 text-sm text-pink-400">
+                                                    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                                    </svg>
+                                                    {errors.address}
+                                                </p>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-900/20">
-                                    <div className="flex items-start">
-                                        <div className="flex h-5 items-center">
+                                {/* Optional Information Section */}
+                                <div>
+                                    <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold text-white">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-600 to-green-500">
+                                            <span className="text-lg font-bold">3</span>
+                                        </div>
+                                        Professional Details
+                                        <span className="text-sm font-normal text-gray-400">(Optional)</span>
+                                    </h2>
+
+                                    <div className="grid gap-6 sm:grid-cols-2">
+                                        <div>
+                                            <label
+                                                htmlFor="organization"
+                                                className="block text-sm font-semibold text-gray-200"
+                                            >
+                                                Organization
+                                            </label>
+                                            <input
+                                                id="organization"
+                                                type="text"
+                                                value={data.organization}
+                                                onChange={(e) => setData('organization', e.target.value)}
+                                                className="mt-2 block w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-gray-400 backdrop-blur-sm transition-all focus:border-amber-500 focus:bg-white/10 focus:ring-2 focus:ring-amber-500/50"
+                                                placeholder="Your organization"
+                                            />
+                                            {errors.organization && (
+                                                <p className="mt-2 flex items-center gap-1 text-sm text-pink-400">
+                                                    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                                    </svg>
+                                                    {errors.organization}
+                                                </p>
+                                            )}
+                                        </div>
+
+                                        <div>
+                                            <label
+                                                htmlFor="designation"
+                                                className="block text-sm font-semibold text-gray-200"
+                                            >
+                                                Designation
+                                            </label>
+                                            <input
+                                                id="designation"
+                                                type="text"
+                                                value={data.designation}
+                                                onChange={(e) => setData('designation', e.target.value)}
+                                                className="mt-2 block w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-gray-400 backdrop-blur-sm transition-all focus:border-amber-500 focus:bg-white/10 focus:ring-2 focus:ring-amber-500/50"
+                                                placeholder="Your role/title"
+                                            />
+                                            {errors.designation && (
+                                                <p className="mt-2 flex items-center gap-1 text-sm text-pink-400">
+                                                    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                                    </svg>
+                                                    {errors.designation}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Terms and Conditions */}
+                                <div className="rounded-2xl border border-green-500/30 bg-gradient-to-br from-green-500/10 to-yellow-500/10 p-6 backdrop-blur-sm">
+                                    <div className="flex items-start gap-4">
+                                        <div className="flex h-6 items-center">
                                             <input
                                                 id="disclaimer_accepted"
                                                 type="checkbox"
@@ -258,19 +334,19 @@ export default function Register({ registration }: { registration?: Registration
                                                 onChange={(e) =>
                                                     setData('disclaimer_accepted', e.target.checked)
                                                 }
-                                                className="h-4 w-4 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
+                                                className="h-5 w-5 rounded-lg border-2 border-green-500/50 bg-white/10 text-green-500 transition-all focus:ring-2 focus:ring-green-500/50 focus:ring-offset-0"
                                                 required
                                             />
                                         </div>
-                                        <div className="ml-3 text-sm">
+                                        <div className="flex-1">
                                             <label
                                                 htmlFor="disclaimer_accepted"
-                                                className="font-medium text-gray-700 dark:text-gray-300"
+                                                className="font-semibold text-white"
                                             >
                                                 I accept the terms and conditions{' '}
-                                                <span className="text-red-500">*</span>
+                                                <span className="text-yellow-400">*</span>
                                             </label>
-                                            <p className="mt-1 text-gray-600 dark:text-gray-400">
+                                            <p className="mt-2 text-sm leading-relaxed text-gray-300">
                                                 By registering for this event, I understand that my
                                                 information will be used solely for event communication and
                                                 management purposes. I consent to receive updates about
@@ -279,32 +355,54 @@ export default function Register({ registration }: { registration?: Registration
                                         </div>
                                     </div>
                                     {errors.disclaimer_accepted && (
-                                        <p className="mt-2 text-sm text-red-600 dark:text-red-400">
+                                        <p className="mt-3 flex items-center gap-1 text-sm text-pink-400">
+                                            <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                            </svg>
                                             {errors.disclaimer_accepted}
                                         </p>
                                     )}
                                 </div>
 
-                                <div className="flex items-center justify-between gap-4">
+                                {/* Form Actions */}
+                                <div className="flex flex-col-reverse items-center gap-4 pt-4 sm:flex-row sm:justify-between">
                                     <Link
                                         href="/"
-                                        className="text-sm font-medium text-amber-600 hover:text-amber-700 dark:text-amber-400 dark:hover:text-amber-300"
+                                        className="glass inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-white/20"
                                     >
-                                        ← Back to Home
+                                        <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                                        </svg>
+                                        Back to Home
                                     </Link>
                                     <button
                                         type="submit"
                                         disabled={processing}
-                                        className="rounded-lg bg-amber-600 px-6 py-3 text-base font-semibold text-white shadow-sm transition-all hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 disabled:opacity-50 dark:bg-amber-500 dark:hover:bg-amber-600"
+                                        className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-gradient-to-r from-green-600 via-yellow-500 to-emerald-600 px-8 py-4 text-base font-semibold text-white shadow-2xl transition-all hover:scale-105 hover:shadow-green-500/50 disabled:opacity-50 disabled:hover:scale-100"
                                     >
-                                        {processing ? 'Submitting...' : registration ? 'Complete Registration' : 'Submit Registration'}
+                                        {processing ? (
+                                            <>
+                                                <svg className="h-5 w-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                                Processing...
+                                            </>
+                                        ) : (
+                                            <>
+                                                {registration ? 'Complete Registration' : 'Submit Registration'}
+                                                <svg className="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                                </svg>
+                                            </>
+                                        )}
                                     </button>
                                 </div>
                             </form>
                         </div>
                     </div>
-                </main>
-            </div>
+                </div>
+            </Layout>
         </>
     );
 }
