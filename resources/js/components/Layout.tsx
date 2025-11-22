@@ -20,22 +20,22 @@ interface LayoutProps {
 export default function Layout({ children, showNav = true, showFooter = true }: LayoutProps) {
     return (
         <div className="relative flex min-h-screen flex-col overflow-hidden">
-            {/* Modern light background */}
-            <div className="fixed inset-0 -z-10 bg-gradient-to-br from-slate-50 via-stone-50 to-slate-100 animate-gradient"></div>
+            {/* Balanced background - not too bright */}
+            <div className="fixed inset-0 -z-10 bg-gradient-to-br from-slate-100 via-stone-100 to-gray-100 animate-gradient"></div>
 
             {/* Botanical pattern overlay */}
-            <BotanicalOverlay pattern="mixed" opacity={0.05} className="fixed inset-0 -z-10" />
+            <BotanicalOverlay pattern="mixed" opacity={0.08} className="fixed inset-0 -z-10" />
 
-            {/* Vibrant floating orbs - More visible on light background */}
+            {/* Vibrant floating orbs */}
             <div className="fixed inset-0 -z-10 overflow-hidden">
-                <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-gradient-to-br from-[#E65C2E]/20 to-[#D4AF37]/20 blur-3xl animate-float"></div>
-                <div className="absolute top-1/2 -left-40 h-80 w-80 rounded-full bg-gradient-to-br from-[#2D9B9B]/15 to-[#1B5E20]/15 blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
-                <div className="absolute -bottom-40 right-1/3 h-80 w-80 rounded-full bg-gradient-to-br from-[#C62828]/15 to-[#E65C2E]/15 blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
+                <div className="absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-[#E65C2E]/25 to-[#D4AF37]/25 blur-3xl animate-float"></div>
+                <div className="absolute top-1/2 -left-40 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-[#2D9B9B]/20 to-[#1B5E20]/20 blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+                <div className="absolute -bottom-40 right-1/3 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-[#C62828]/20 to-[#E65C2E]/20 blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
             </div>
 
-            {/* Modern navigation */}
+            {/* Glassmorphism navigation */}
             {showNav && (
-                <nav className="relative z-50 border-b border-[#D4AF37]/30 bg-white/95 backdrop-blur-xl shadow-sm">
+                <nav className="glass-light relative z-50 border-b border-white/40 shadow-lg">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="flex h-20 items-center justify-between">
                             <Link href="/" className="flex items-center space-x-3 group">
@@ -69,9 +69,9 @@ export default function Layout({ children, showNav = true, showFooter = true }: 
                 {children}
             </main>
 
-            {/* Modern footer */}
+            {/* Glassmorphism footer */}
             {showFooter && (
-                <footer className="relative z-50 border-t-2 border-[#D4AF37] bg-white py-8">
+                <footer className="glass-light relative z-50 border-t-2 border-white/40 py-8">
                     <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
                         <div className="mb-4 flex justify-center">
                             <LogoBadge size="sm" />

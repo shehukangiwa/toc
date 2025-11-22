@@ -93,18 +93,18 @@ export default function Welcome() {
         <>
             <Head title="Tastes of Culture 2025 - ÒRÌKÌ" />
 
-            {/* Main Container - Modern lighter Nigerian theme */}
-            <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-stone-50 to-slate-100">
+            {/* Main Container - Balanced glassmorphism theme */}
+            <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-100 via-stone-100 to-gray-100">
                 {/* Modern botanical pattern background */}
-                <BotanicalOverlay pattern="mixed" opacity={0.08} className="z-0" />
+                <BotanicalOverlay pattern="mixed" opacity={0.1} className="z-0" />
 
-                {/* Vibrant Nigerian-colored gradient orbs - More visible on light background */}
-                <div className="absolute left-1/4 top-0 -z-10 h-96 w-96 rounded-full bg-gradient-to-br from-[#E65C2E]/20 to-[#D4AF37]/20 blur-3xl"></div>
-                <div className="absolute right-1/4 top-1/3 -z-10 h-96 w-96 rounded-full bg-gradient-to-br from-[#2D9B9B]/15 to-[#1B5E20]/15 blur-3xl"></div>
-                <div className="absolute bottom-0 left-1/2 -z-10 h-96 w-96 rounded-full bg-gradient-to-br from-[#C62828]/15 to-[#E65C2E]/15 blur-3xl"></div>
+                {/* Vibrant Nigerian-colored gradient orbs */}
+                <div className="absolute left-1/4 top-0 -z-10 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-[#E65C2E]/25 to-[#D4AF37]/25 blur-3xl"></div>
+                <div className="absolute right-1/4 top-1/3 -z-10 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-[#2D9B9B]/20 to-[#1B5E20]/20 blur-3xl"></div>
+                <div className="absolute bottom-0 left-1/2 -z-10 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-[#C62828]/20 to-[#E65C2E]/20 blur-3xl"></div>
 
-                {/* Navigation - Modern lighter theme */}
-                <nav className="relative border-b border-[#D4AF37]/30 bg-white/95 backdrop-blur-xl shadow-sm">
+                {/* Navigation - Glassmorphism */}
+                <nav className="glass-light relative border-b border-white/40 shadow-lg">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="flex h-20 items-center justify-between">
                             {/* Modern circular badge logo */}
@@ -144,8 +144,8 @@ export default function Welcome() {
 
                     <div className="mx-auto max-w-7xl">
                         <div className={`text-center transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-                            {/* Event Badge - Modern with white background */}
-                            <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-[#D4AF37] bg-white px-6 py-2 shadow-lg">
+                            {/* Event Badge - Glassmorphism */}
+                            <div className="glass-card mb-6 inline-flex items-center gap-2 rounded-full border-2 border-[#D4AF37]/40 px-6 py-2">
                                 <span className="text-2xl">🏆</span>
                                 <span className="text-sm font-semibold text-gray-800">5th Gastronomy Event</span>
                             </div>
@@ -164,17 +164,17 @@ export default function Welcome() {
                                 cuisine, tourism, travel and hospitality through <span className="font-bold text-[#E65C2E]">7 pillars</span> known as <span className="font-bold text-[#E65C2E]">FLAVORS</span>.
                             </p>
 
-                            {/* Event Details - Modern cards */}
+                            {/* Event Details - Glassmorphism cards */}
                             <div className="mb-12 flex flex-wrap items-center justify-center gap-4">
-                                <div className="flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-md border border-gray-200">
+                                <div className="glass-card flex items-center gap-2 rounded-full border border-white/40 px-4 py-2">
                                     <span className="text-2xl">📅</span>
                                     <span className="font-semibold text-gray-800">Dec 2-6, 2025</span>
                                 </div>
-                                <div className="flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-md border border-gray-200">
+                                <div className="glass-card flex items-center gap-2 rounded-full border border-white/40 px-4 py-2">
                                     <span className="text-2xl">📍</span>
                                     <span className="font-semibold text-gray-800">Eagle Square, Abuja FCT</span>
                                 </div>
-                                <div className="flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-md border border-gray-200">
+                                <div className="glass-card flex items-center gap-2 rounded-full border border-white/40 px-4 py-2">
                                     <span className="text-2xl">⏰</span>
                                     <span className="font-semibold text-gray-800">11am - 10pm Daily</span>
                                 </div>
@@ -210,8 +210,8 @@ export default function Welcome() {
                     </div>
                 </div>
 
-                {/* FLAVORS Section - Modern cultural showcase */}
-                <section className="relative px-4 py-20 sm:px-6 lg:px-8 bg-white/50">
+                {/* FLAVORS Section - Glassmorphism showcase */}
+                <section className="relative px-4 py-20 sm:px-6 lg:px-8">
                     {/* Fish pattern background */}
                     <BotanicalOverlay pattern="fish" opacity={0.08} />
 
@@ -229,7 +229,7 @@ export default function Welcome() {
                             {flavors.map((flavor, index) => (
                                 <div
                                     key={flavor.name}
-                                    className={`group relative overflow-hidden rounded-2xl border-2 ${flavor.borderColor} bg-white p-6 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl ${flavor.hoverShadow}`}
+                                    className={`glass-card group relative overflow-hidden rounded-2xl border-2 ${flavor.borderColor} p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl ${flavor.hoverShadow}`}
                                     style={{
                                         animationDelay: `${index * 100}ms`,
                                     }}
@@ -263,8 +263,8 @@ export default function Welcome() {
                     <BotanicalOverlay pattern="mandala" opacity={0.1} />
 
                     <div className="mx-auto max-w-7xl">
-                        <div className="overflow-hidden rounded-3xl border-2 border-[#D4AF37] bg-white shadow-2xl p-1">
-                            <div className="relative rounded-3xl bg-gradient-to-br from-white to-gray-50 p-8 md:p-12">
+                        <div className="glass-card overflow-hidden rounded-3xl border-2 border-[#D4AF37]/40 shadow-2xl p-1">
+                            <div className="relative rounded-3xl p-8 md:p-12">
                                 {/* Corner ornaments */}
                                 <CornerOrnament position="top-left" className="absolute left-4 top-4 w-12 h-12 opacity-40" />
                                 <CornerOrnament position="top-right" className="absolute right-4 top-4 w-12 h-12 opacity-40" />
@@ -336,8 +336,8 @@ export default function Welcome() {
                     </div>
                 </div>
 
-                {/* Highlights Section - Modern vibrant cards */}
-                <section className="relative px-4 py-20 sm:px-6 lg:px-8 bg-white/50">
+                {/* Highlights Section - Glassmorphism cards */}
+                <section className="relative px-4 py-20 sm:px-6 lg:px-8">
                     <div className="mx-auto max-w-7xl">
                         <div className="mb-12 text-center">
                             <h2 className="mb-4 text-4xl font-black text-gray-900 sm:text-5xl">
@@ -348,7 +348,7 @@ export default function Welcome() {
 
                         <div className="grid gap-6 md:grid-cols-3">
                             {/* Live Entertainment - Red (Passion) */}
-                            <div className="group relative rounded-2xl border-2 border-[#C62828] bg-white p-8 shadow-lg transition-all hover:scale-105 hover:shadow-xl hover:shadow-[#C62828]/30">
+                            <div className="glass-card group relative rounded-2xl border-2 border-[#C62828]/40 p-8 transition-all hover:scale-105 hover:shadow-xl hover:shadow-[#C62828]/30">
                                 <CornerOrnament position="top-right" className="absolute right-2 top-2 w-8 h-8 opacity-20 group-hover:opacity-40 transition-opacity" />
                                 <div className="mb-4 text-5xl">🎭</div>
                                 <h3 className="mb-3 text-xl font-bold text-gray-900">Live Entertainment</h3>
@@ -356,7 +356,7 @@ export default function Welcome() {
                             </div>
 
                             {/* Media Coverage - Teal (Prosperity) */}
-                            <div className="group relative rounded-2xl border-2 border-[#2D9B9B] bg-white p-8 shadow-lg transition-all hover:scale-105 hover:shadow-xl hover:shadow-[#2D9B9B]/30">
+                            <div className="glass-card group relative rounded-2xl border-2 border-[#2D9B9B]/40 p-8 transition-all hover:scale-105 hover:shadow-xl hover:shadow-[#2D9B9B]/30">
                                 <CornerOrnament position="top-right" className="absolute right-2 top-2 w-8 h-8 opacity-20 group-hover:opacity-40 transition-opacity" />
                                 <div className="mb-4 text-5xl">📺</div>
                                 <h3 className="mb-3 text-xl font-bold text-gray-900">Extensive Media Coverage</h3>
@@ -364,7 +364,7 @@ export default function Welcome() {
                             </div>
 
                             {/* Global Recognition - Orange (Excellence) */}
-                            <div className="group relative rounded-2xl border-2 border-[#E65C2E] bg-white p-8 shadow-lg transition-all hover:scale-105 hover:shadow-xl hover:shadow-[#E65C2E]/30">
+                            <div className="glass-card group relative rounded-2xl border-2 border-[#E65C2E]/40 p-8 transition-all hover:scale-105 hover:shadow-xl hover:shadow-[#E65C2E]/30">
                                 <CornerOrnament position="top-right" className="absolute right-2 top-2 w-8 h-8 opacity-20 group-hover:opacity-40 transition-opacity" />
                                 <div className="mb-4 text-5xl">🌍</div>
                                 <h3 className="mb-3 text-xl font-bold text-gray-900">Global Recognition</h3>
@@ -386,10 +386,10 @@ export default function Welcome() {
                     </div>
                 </section>
 
-                {/* Final CTA Section - Modern vibrant */}
+                {/* Final CTA Section - Glassmorphism */}
                 <section className="relative px-4 py-20 sm:px-6 lg:px-8">
                     <div className="mx-auto max-w-4xl text-center">
-                        <div className="relative overflow-hidden rounded-3xl border-2 border-[#D4AF37] bg-gradient-to-br from-white to-gray-50 p-12 shadow-2xl">
+                        <div className="glass-card relative overflow-hidden rounded-3xl border-2 border-[#D4AF37]/40 p-12">
                             {/* Corner ornaments */}
                             <CornerOrnament position="top-left" className="absolute left-4 top-4 w-12 h-12 opacity-30" />
                             <CornerOrnament position="top-right" className="absolute right-4 top-4 w-12 h-12 opacity-30" />
@@ -415,8 +415,8 @@ export default function Welcome() {
                     </div>
                 </section>
 
-                {/* Footer - Modern light theme */}
-                <footer className="relative border-t-2 border-[#D4AF37] bg-white py-8">
+                {/* Footer - Glassmorphism */}
+                <footer className="glass-light relative border-t-2 border-white/40 py-8">
                     <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
                         <div className="mb-4 flex justify-center">
                             <LogoBadge size="sm" />

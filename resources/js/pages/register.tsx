@@ -1,6 +1,7 @@
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 import Layout from '@/components/Layout';
+import { LogoBadge, BotanicalOverlay } from '@/components/BotanicalPatterns';
 
 interface Registration {
     id: number;
@@ -41,33 +42,34 @@ export default function Register({ registration }: { registration?: Registration
 
     return (
         <>
-            <Head title="Register - Oriki" />
+            <Head title="Register - ÒRÌKÌ" />
             <Layout>
-                <div className="w-full px-4 py-12 sm:px-6 lg:px-8">
-                    <div className="mx-auto max-w-4xl">
+                <div className="relative w-full px-4 py-12 sm:px-6 lg:px-8">
+                    {/* Pattern overlay */}
+                    <BotanicalOverlay pattern="tropical" opacity={0.05} className="absolute inset-0" />
+
+                    <div className="relative mx-auto max-w-4xl">
                         {/* Header */}
                         <div className="mb-12 animate-slide-up text-center">
-                            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-green-600 via-yellow-500 to-emerald-600 shadow-2xl">
-                                <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                </svg>
+                            <div className="mb-6 flex justify-center">
+                                <LogoBadge size="lg" />
                             </div>
-                            <h1 className="mb-4 text-5xl font-bold text-white">
+                            <h1 className="mb-4 text-5xl font-black text-gray-900">
                                 Event Registration
                             </h1>
-                            <p className="text-xl text-gray-300">
-                                {registration ? 'Complete your registration for Oriki' : 'Reserve your seat for the royal dining experience'}
+                            <p className="text-xl text-gray-700">
+                                {registration ? 'Complete your registration for ÒRÌKÌ' : 'Reserve your seat for the royal dining experience'}
                             </p>
                         </div>
 
-                        {/* Form Card */}
-                        <div className="animate-slide-up glass-dark rounded-3xl p-8 shadow-2xl sm:p-12" style={{ animationDelay: '0.1s' }}>
-                            <form onSubmit={submit} className="space-y-8">
+                        {/* Form Card - Glassmorphism */}
+                        <div className="glass-card animate-slide-up rounded-3xl border-2 border-white/40 p-8 shadow-2xl sm:p-12" style={{ animationDelay: '0.1s' }}>
+                            <form onSubmit={submit} className="space-y-10">
                                 {/* Personal Information Section */}
                                 <div>
-                                    <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold text-white">
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-green-600 to-yellow-500">
-                                            <span className="text-lg font-bold">1</span>
+                                    <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold text-gray-900">
+                                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#E65C2E] to-[#C62828] shadow-lg">
+                                            <span className="text-lg font-bold text-white">1</span>
                                         </div>
                                         Personal Information
                                     </h2>
@@ -76,21 +78,21 @@ export default function Register({ registration }: { registration?: Registration
                                         <div>
                                             <label
                                                 htmlFor="first_name"
-                                                className="block text-sm font-semibold text-gray-200"
+                                                className="block text-sm font-semibold text-gray-800"
                                             >
-                                                First Name <span className="text-pink-400">*</span>
+                                                First Name <span className="text-[#E65C2E]">*</span>
                                             </label>
                                             <input
                                                 id="first_name"
                                                 type="text"
                                                 value={data.first_name}
                                                 onChange={(e) => setData('first_name', e.target.value)}
-                                                className="mt-2 block w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-gray-400 backdrop-blur-sm transition-all focus:border-amber-500 focus:bg-white/10 focus:ring-2 focus:ring-amber-500/50"
+                                                className="mt-2 block w-full rounded-xl border-2 border-gray-200 bg-white/60 px-4 py-3 text-gray-900 placeholder-gray-500 backdrop-blur-sm transition-all focus:border-[#E65C2E] focus:bg-white focus:ring-2 focus:ring-[#E65C2E]/20 focus:outline-none"
                                                 placeholder="Enter first name"
                                                 required
                                             />
                                             {errors.first_name && (
-                                                <p className="mt-2 flex items-center gap-1 text-sm text-pink-400">
+                                                <p className="mt-2 flex items-center gap-1 text-sm text-[#C62828]">
                                                     <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                                                     </svg>
@@ -102,21 +104,21 @@ export default function Register({ registration }: { registration?: Registration
                                         <div>
                                             <label
                                                 htmlFor="second_name"
-                                                className="block text-sm font-semibold text-gray-200"
+                                                className="block text-sm font-semibold text-gray-800"
                                             >
-                                                Second Name <span className="text-pink-400">*</span>
+                                                Second Name <span className="text-[#E65C2E]">*</span>
                                             </label>
                                             <input
                                                 id="second_name"
                                                 type="text"
                                                 value={data.second_name}
                                                 onChange={(e) => setData('second_name', e.target.value)}
-                                                className="mt-2 block w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-gray-400 backdrop-blur-sm transition-all focus:border-amber-500 focus:bg-white/10 focus:ring-2 focus:ring-amber-500/50"
+                                                className="mt-2 block w-full rounded-xl border-2 border-gray-200 bg-white/60 px-4 py-3 text-gray-900 placeholder-gray-500 backdrop-blur-sm transition-all focus:border-[#E65C2E] focus:bg-white focus:ring-2 focus:ring-[#E65C2E]/20 focus:outline-none"
                                                 placeholder="Enter second name"
                                                 required
                                             />
                                             {errors.second_name && (
-                                                <p className="mt-2 flex items-center gap-1 text-sm text-pink-400">
+                                                <p className="mt-2 flex items-center gap-1 text-sm text-[#C62828]">
                                                     <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                                                     </svg>
@@ -128,21 +130,21 @@ export default function Register({ registration }: { registration?: Registration
                                         <div>
                                             <label
                                                 htmlFor="last_name"
-                                                className="block text-sm font-semibold text-gray-200"
+                                                className="block text-sm font-semibold text-gray-800"
                                             >
-                                                Last Name <span className="text-pink-400">*</span>
+                                                Last Name <span className="text-[#E65C2E]">*</span>
                                             </label>
                                             <input
                                                 id="last_name"
                                                 type="text"
                                                 value={data.last_name}
                                                 onChange={(e) => setData('last_name', e.target.value)}
-                                                className="mt-2 block w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-gray-400 backdrop-blur-sm transition-all focus:border-amber-500 focus:bg-white/10 focus:ring-2 focus:ring-amber-500/50"
+                                                className="mt-2 block w-full rounded-xl border-2 border-gray-200 bg-white/60 px-4 py-3 text-gray-900 placeholder-gray-500 backdrop-blur-sm transition-all focus:border-[#E65C2E] focus:bg-white focus:ring-2 focus:ring-[#E65C2E]/20 focus:outline-none"
                                                 placeholder="Enter last name"
                                                 required
                                             />
                                             {errors.last_name && (
-                                                <p className="mt-2 flex items-center gap-1 text-sm text-pink-400">
+                                                <p className="mt-2 flex items-center gap-1 text-sm text-[#C62828]">
                                                     <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                                                     </svg>
@@ -155,101 +157,84 @@ export default function Register({ registration }: { registration?: Registration
 
                                 {/* Contact Information Section */}
                                 <div>
-                                    <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold text-white">
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-500 to-green-600">
-                                            <span className="text-lg font-bold">2</span>
+                                    <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold text-gray-900">
+                                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#2D9B9B] to-[#1B5E20] shadow-lg">
+                                            <span className="text-lg font-bold text-white">2</span>
                                         </div>
-                                        Contact Details
+                                        Contact Information
                                     </h2>
 
-                                    <div className="space-y-6">
-                                        <div className="grid gap-6 sm:grid-cols-2">
-                                            <div>
-                                                <label
-                                                    htmlFor="email"
-                                                    className="block text-sm font-semibold text-gray-200"
-                                                >
-                                                    Email Address <span className="text-pink-400">*</span>
-                                                </label>
-                                                <div className="relative mt-2">
-                                                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-                                                        <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                                        </svg>
-                                                    </div>
-                                                    <input
-                                                        id="email"
-                                                        type="email"
-                                                        value={data.email}
-                                                        onChange={(e) => setData('email', e.target.value)}
-                                                        className="block w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-400 backdrop-blur-sm transition-all focus:border-amber-500 focus:bg-white/10 focus:ring-2 focus:ring-amber-500/50 disabled:cursor-not-allowed disabled:opacity-50"
-                                                        placeholder="your@email.com"
-                                                        required
-                                                        disabled={!!registration}
-                                                    />
-                                                </div>
-                                                {errors.email && (
-                                                    <p className="mt-2 flex items-center gap-1 text-sm text-pink-400">
-                                                        <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                                                        </svg>
-                                                        {errors.email}
-                                                    </p>
-                                                )}
-                                            </div>
-
-                                            <div>
-                                                <label
-                                                    htmlFor="phone_number"
-                                                    className="block text-sm font-semibold text-gray-200"
-                                                >
-                                                    Phone Number <span className="text-pink-400">*</span>
-                                                </label>
-                                                <div className="relative mt-2">
-                                                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-                                                        <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                                        </svg>
-                                                    </div>
-                                                    <input
-                                                        id="phone_number"
-                                                        type="tel"
-                                                        value={data.phone_number}
-                                                        onChange={(e) => setData('phone_number', e.target.value)}
-                                                        className="block w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-400 backdrop-blur-sm transition-all focus:border-amber-500 focus:bg-white/10 focus:ring-2 focus:ring-amber-500/50"
-                                                        placeholder="+1 (555) 000-0000"
-                                                        required
-                                                    />
-                                                </div>
-                                                {errors.phone_number && (
-                                                    <p className="mt-2 flex items-center gap-1 text-sm text-pink-400">
-                                                        <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                                                        </svg>
-                                                        {errors.phone_number}
-                                                    </p>
-                                                )}
-                                            </div>
+                                    <div className="grid gap-6 sm:grid-cols-2">
+                                        <div>
+                                            <label
+                                                htmlFor="email"
+                                                className="block text-sm font-semibold text-gray-800"
+                                            >
+                                                Email Address <span className="text-[#E65C2E]">*</span>
+                                            </label>
+                                            <input
+                                                id="email"
+                                                type="email"
+                                                value={data.email}
+                                                onChange={(e) => setData('email', e.target.value)}
+                                                className="mt-2 block w-full rounded-xl border-2 border-gray-200 bg-white/60 px-4 py-3 text-gray-900 placeholder-gray-500 backdrop-blur-sm transition-all focus:border-[#2D9B9B] focus:bg-white focus:ring-2 focus:ring-[#2D9B9B]/20 focus:outline-none"
+                                                placeholder="your.email@example.com"
+                                                required
+                                            />
+                                            {errors.email && (
+                                                <p className="mt-2 flex items-center gap-1 text-sm text-[#C62828]">
+                                                    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                                    </svg>
+                                                    {errors.email}
+                                                </p>
+                                            )}
                                         </div>
 
                                         <div>
                                             <label
-                                                htmlFor="address"
-                                                className="block text-sm font-semibold text-gray-200"
+                                                htmlFor="phone_number"
+                                                className="block text-sm font-semibold text-gray-800"
                                             >
-                                                Address <span className="text-pink-400">*</span>
+                                                Phone Number <span className="text-[#E65C2E]">*</span>
+                                            </label>
+                                            <input
+                                                id="phone_number"
+                                                type="tel"
+                                                value={data.phone_number}
+                                                onChange={(e) => setData('phone_number', e.target.value)}
+                                                className="mt-2 block w-full rounded-xl border-2 border-gray-200 bg-white/60 px-4 py-3 text-gray-900 placeholder-gray-500 backdrop-blur-sm transition-all focus:border-[#2D9B9B] focus:bg-white focus:ring-2 focus:ring-[#2D9B9B]/20 focus:outline-none"
+                                                placeholder="+234 801 234 5678"
+                                                required
+                                            />
+                                            {errors.phone_number && (
+                                                <p className="mt-2 flex items-center gap-1 text-sm text-[#C62828]">
+                                                    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                                    </svg>
+                                                    {errors.phone_number}
+                                                </p>
+                                            )}
+                                        </div>
+
+                                        <div className="sm:col-span-2">
+                                            <label
+                                                htmlFor="address"
+                                                className="block text-sm font-semibold text-gray-800"
+                                            >
+                                                Address <span className="text-[#E65C2E]">*</span>
                                             </label>
                                             <textarea
                                                 id="address"
                                                 value={data.address}
                                                 onChange={(e) => setData('address', e.target.value)}
                                                 rows={3}
-                                                className="mt-2 block w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-gray-400 backdrop-blur-sm transition-all focus:border-amber-500 focus:bg-white/10 focus:ring-2 focus:ring-amber-500/50"
+                                                className="mt-2 block w-full rounded-xl border-2 border-gray-200 bg-white/60 px-4 py-3 text-gray-900 placeholder-gray-500 backdrop-blur-sm transition-all focus:border-[#2D9B9B] focus:bg-white focus:ring-2 focus:ring-[#2D9B9B]/20 focus:outline-none"
                                                 placeholder="Enter your full address"
                                                 required
                                             />
                                             {errors.address && (
-                                                <p className="mt-2 flex items-center gap-1 text-sm text-pink-400">
+                                                <p className="mt-2 flex items-center gap-1 text-sm text-[#C62828]">
                                                     <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                                                     </svg>
@@ -260,21 +245,21 @@ export default function Register({ registration }: { registration?: Registration
                                     </div>
                                 </div>
 
-                                {/* Optional Information Section */}
+                                {/* Professional Information Section */}
                                 <div>
-                                    <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold text-white">
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-600 to-green-500">
-                                            <span className="text-lg font-bold">3</span>
+                                    <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold text-gray-900">
+                                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#D4AF37] to-[#E65C2E] shadow-lg">
+                                            <span className="text-lg font-bold text-white">3</span>
                                         </div>
-                                        Professional Details
-                                        <span className="text-sm font-normal text-gray-400">(Optional)</span>
+                                        Professional Information
+                                        <span className="text-sm font-normal text-gray-600">(Optional)</span>
                                     </h2>
 
                                     <div className="grid gap-6 sm:grid-cols-2">
                                         <div>
                                             <label
                                                 htmlFor="organization"
-                                                className="block text-sm font-semibold text-gray-200"
+                                                className="block text-sm font-semibold text-gray-800"
                                             >
                                                 Organization
                                             </label>
@@ -283,11 +268,11 @@ export default function Register({ registration }: { registration?: Registration
                                                 type="text"
                                                 value={data.organization}
                                                 onChange={(e) => setData('organization', e.target.value)}
-                                                className="mt-2 block w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-gray-400 backdrop-blur-sm transition-all focus:border-amber-500 focus:bg-white/10 focus:ring-2 focus:ring-amber-500/50"
-                                                placeholder="Your organization"
+                                                className="mt-2 block w-full rounded-xl border-2 border-gray-200 bg-white/60 px-4 py-3 text-gray-900 placeholder-gray-500 backdrop-blur-sm transition-all focus:border-[#D4AF37] focus:bg-white focus:ring-2 focus:ring-[#D4AF37]/20 focus:outline-none"
+                                                placeholder="Company or organization name"
                                             />
                                             {errors.organization && (
-                                                <p className="mt-2 flex items-center gap-1 text-sm text-pink-400">
+                                                <p className="mt-2 flex items-center gap-1 text-sm text-[#C62828]">
                                                     <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                                                     </svg>
@@ -299,7 +284,7 @@ export default function Register({ registration }: { registration?: Registration
                                         <div>
                                             <label
                                                 htmlFor="designation"
-                                                className="block text-sm font-semibold text-gray-200"
+                                                className="block text-sm font-semibold text-gray-800"
                                             >
                                                 Designation
                                             </label>
@@ -308,11 +293,11 @@ export default function Register({ registration }: { registration?: Registration
                                                 type="text"
                                                 value={data.designation}
                                                 onChange={(e) => setData('designation', e.target.value)}
-                                                className="mt-2 block w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-gray-400 backdrop-blur-sm transition-all focus:border-amber-500 focus:bg-white/10 focus:ring-2 focus:ring-amber-500/50"
-                                                placeholder="Your role/title"
+                                                className="mt-2 block w-full rounded-xl border-2 border-gray-200 bg-white/60 px-4 py-3 text-gray-900 placeholder-gray-500 backdrop-blur-sm transition-all focus:border-[#D4AF37] focus:bg-white focus:ring-2 focus:ring-[#D4AF37]/20 focus:outline-none"
+                                                placeholder="Your role or title"
                                             />
                                             {errors.designation && (
-                                                <p className="mt-2 flex items-center gap-1 text-sm text-pink-400">
+                                                <p className="mt-2 flex items-center gap-1 text-sm text-[#C62828]">
                                                     <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                                                     </svg>
@@ -323,39 +308,24 @@ export default function Register({ registration }: { registration?: Registration
                                     </div>
                                 </div>
 
-                                {/* Terms and Conditions */}
-                                <div className="rounded-2xl border border-green-500/30 bg-gradient-to-br from-green-500/10 to-yellow-500/10 p-6 backdrop-blur-sm">
-                                    <div className="flex items-start gap-4">
-                                        <div className="flex h-6 items-center">
-                                            <input
-                                                id="disclaimer_accepted"
-                                                type="checkbox"
-                                                checked={data.disclaimer_accepted}
-                                                onChange={(e) =>
-                                                    setData('disclaimer_accepted', e.target.checked)
-                                                }
-                                                className="h-5 w-5 rounded-lg border-2 border-green-500/50 bg-white/10 text-green-500 transition-all focus:ring-2 focus:ring-green-500/50 focus:ring-offset-0"
-                                                required
-                                            />
-                                        </div>
-                                        <div className="flex-1">
-                                            <label
-                                                htmlFor="disclaimer_accepted"
-                                                className="font-semibold text-white"
-                                            >
-                                                I accept the terms and conditions{' '}
-                                                <span className="text-yellow-400">*</span>
-                                            </label>
-                                            <p className="mt-2 text-sm leading-relaxed text-gray-300">
-                                                By registering for this event, I understand that my
-                                                information will be used solely for event communication and
-                                                management purposes. I consent to receive updates about
-                                                Oriki: The Royal Dining Experience via email.
-                                            </p>
-                                        </div>
+                                {/* Disclaimer */}
+                                <div className="glass rounded-2xl border-2 border-[#D4AF37]/40 p-6">
+                                    <div className="flex items-start gap-3">
+                                        <input
+                                            id="disclaimer_accepted"
+                                            type="checkbox"
+                                            checked={data.disclaimer_accepted}
+                                            onChange={(e) => setData('disclaimer_accepted', e.target.checked)}
+                                            className="mt-1 h-5 w-5 rounded border-gray-300 text-[#E65C2E] focus:ring-2 focus:ring-[#E65C2E]/20"
+                                            required
+                                        />
+                                        <label htmlFor="disclaimer_accepted" className="text-sm text-gray-700">
+                                            I confirm that the information provided is accurate and I agree to receive
+                                            event updates and communications regarding ÒRÌKÌ Royal Dining Experience.
+                                        </label>
                                     </div>
                                     {errors.disclaimer_accepted && (
-                                        <p className="mt-3 flex items-center gap-1 text-sm text-pink-400">
+                                        <p className="mt-2 flex items-center gap-1 text-sm text-[#C62828]">
                                             <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                                             </svg>
@@ -364,33 +334,30 @@ export default function Register({ registration }: { registration?: Registration
                                     )}
                                 </div>
 
-                                {/* Form Actions */}
-                                <div className="flex flex-col-reverse items-center gap-4 pt-4 sm:flex-row sm:justify-between">
+                                {/* Submit Button */}
+                                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6">
                                     <Link
                                         href="/"
-                                        className="glass inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-white/20"
+                                        className="text-sm font-semibold text-gray-700 hover:text-[#E65C2E] transition-colors"
                                     >
-                                        <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                                        </svg>
-                                        Back to Home
+                                        ← Back to Home
                                     </Link>
                                     <button
                                         type="submit"
                                         disabled={processing}
-                                        className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-gradient-to-r from-green-600 via-yellow-500 to-emerald-600 px-8 py-4 text-base font-semibold text-white shadow-2xl transition-all hover:scale-105 hover:shadow-green-500/50 disabled:opacity-50 disabled:hover:scale-100"
+                                        className="group relative inline-flex items-center gap-3 overflow-hidden rounded-xl bg-gradient-to-r from-[#E65C2E] via-[#D4AF37] to-[#C62828] px-10 py-4 text-lg font-bold text-white shadow-2xl shadow-[#E65C2E]/30 transition-all hover:scale-105 hover:shadow-[#E65C2E]/50 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         {processing ? (
                                             <>
-                                                <svg className="h-5 w-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                                                <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                                 </svg>
-                                                Processing...
+                                                <span>Processing...</span>
                                             </>
                                         ) : (
                                             <>
-                                                {registration ? 'Complete Registration' : 'Submit Registration'}
+                                                <span>{registration ? 'Complete Registration' : 'Submit Registration'}</span>
                                                 <svg className="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                                                 </svg>
@@ -400,6 +367,14 @@ export default function Register({ registration }: { registration?: Registration
                                 </div>
                             </form>
                         </div>
+
+                        {/* Help Text */}
+                        <p className="mt-8 text-center text-sm text-gray-600">
+                            Need help? Contact us at{' '}
+                            <a href="mailto:info@tastesofculture.ng" className="font-semibold text-[#E65C2E] hover:text-[#C62828]">
+                                info@tastesofculture.ng
+                            </a>
+                        </p>
                     </div>
                 </div>
             </Layout>
